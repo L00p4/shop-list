@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`<Button /> should render Primary 1`] = `
+.c0 {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: var(--font-medium);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  transition: all var(--transition-normal);
+  background: var(--purple-500);
+  color: var(--text-primary);
+  border: 1px solid var(--purple-500);
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
+  border-radius: var(--radius-md);
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.c0:hover:not(:disabled) {
+  background: var(--purple-700);
+  border-color: var(--purple-700);
+}
+
+.c0:active:not(:disabled) {
+  background: var(--purple-700);
+  transform: translateY(1px);
+}
+
+.c0:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.c0:focus-visible {
+  outline: 2px solid var(--purple-500);
+  outline-offset: 2px;
+}
+
+<div>
+  <button
+    class="c0"
+    type="button"
+    variant="primary"
+  >
+    Comprar
+  </button>
+</div>
+`;
+
+exports[`<Button /> should render Skeleton 1`] = `
+.c0 {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: var(--font-medium);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  transition: all var(--transition-normal);
+  background: var(--purple-500);
+  color: var(--text-primary);
+  border: 1px solid var(--purple-500);
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
+  border-radius: var(--radius-md);
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.c0:hover:not(:disabled) {
+  background: var(--purple-700);
+  border-color: var(--purple-700);
+}
+
+.c0:active:not(:disabled) {
+  background: var(--purple-700);
+  transform: translateY(1px);
+}
+
+.c0:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.c0:focus-visible {
+  outline: 2px solid var(--purple-500);
+  outline-offset: 2px;
+}
+
+<div>
+  <button
+    class="c0"
+    disabled=""
+    variant="primary"
+  >
+    <h1
+      class="skeleton"
+    >
+      Button
+    </h1>
+  </button>
+</div>
+`;
