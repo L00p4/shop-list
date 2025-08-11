@@ -74,7 +74,7 @@ export const WrapperInput = styled.div<WrapperInputProps>`
 
 export const Label = styled.label`
   color: var(--text-secondary);
-  font-size: var(--text-sm);
+  font-size: var(--font-size-sm);
   font-weight: var(--font-medium);
 
   /* Cursor pointer to indicate it's clickable */
@@ -91,7 +91,7 @@ export const StyledInput = styled.input<StyledInputProps>`
   border-radius: var(--radius-md);
 
   /* Typography */
-  font-size: var(--text-base);
+  font-size: var(--font-size-base);
   color: var(--text-primary);
 
   /* Transitions */
@@ -134,7 +134,7 @@ export const StyledInput = styled.input<StyledInputProps>`
 
 export const ErrorMessage = styled.span`
   color: var(--error);
-  font-size: var(--text-xs);
+  font-size: var(--font-size-xs);
   font-weight: var(--font-medium);
   margin-top: calc(var(--space-2) * -1);
   margin-bottom: var(--space-1);
@@ -214,15 +214,15 @@ export const ErrorMessage = styled.span`
 // const inputSizes = {
 //   small: css`
 //     height: var(--height-input-sm);
-//     font-size: var(--text-sm);
+//     font-size: var(--font-size-sm);
 //   `,
 //   medium: css`
 //     height: var(--height-input-md);
-//     font-size: var(--text-base);
+//     font-size: var(--font-size-base);
 //   `,
 //   large: css`
 //     height: var(--height-input-lg);
-//     font-size: var(--text-lg);
+//     font-size: var(--font-size-lg);
 //   `
 // }
 
@@ -281,7 +281,7 @@ export const ErrorMessage = styled.span`
 
 // export const Label = styled.label<LabelProps>`
 //   color: var(--text-secondary);
-//   font-size: var(--text-sm);
+//   font-size: var(--font-size-sm);
 //   font-weight: var(--font-medium);
 //   cursor: pointer;
 
@@ -364,11 +364,11 @@ export const ErrorMessage = styled.span`
 
 // export const ErrorMessage = styled.span`
 //   color: var(--error);
-//   font-size: var(--text-xs);
+//   font-size: var(--font-size-xs);
 //   font-weight: var(--font-medium);
 // `
 
 // export const HintText = styled.span`
 //   color: var(--text-tertiary);
-//   font-size: var(--text-xs);
+//   font-size: var(--font-size-xs);
 // `

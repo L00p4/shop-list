@@ -58,17 +58,17 @@ const buttonVariants = {
 const buttonSizes = {
   small: css`
     padding: var(--space-1) var(--space-3);
-    font-size: var(--text-xs);
+    font-size: var(--font-size-xs);
     border-radius: var(--radius-md);
   `,
   medium: css`
     padding: var(--space-2) var(--space-4);
-    font-size: var(--text-sm);
+    font-size: var(--font-size-sm);
     border-radius: var(--radius-md);
   `,
   large: css`
     padding: var(--space-3) var(--space-6);
-    font-size: var(--text-base);
+    font-size: var(--font-size-base);
     border-radius: var(--radius-lg);
   `
 }
@@ -196,21 +196,21 @@ export const WrapperButton = styled.button<WrapperButtonProps>`
 //   small: css`
 //     height: var(--button-height-sm);
 //     padding: 0 var(--space-3);
-//     font-size: var(--text-xs);
+//     font-size: var(--font-size-xs);
 //     border-radius: var(--radius-md);
 //     gap: var(--space-1);
 //   `,
 //   medium: css`
 //     height: var(--button-height-md);
 //     padding: 0 var(--space-4);
-//     font-size: var(--text-sm);
+//     font-size: var(--font-size-sm);
 //     border-radius: var(--radius-md);
 //     gap: var(--space-2);
 //   `,
 //   large: css`
 //     height: var(--button-height-lg);
 //     padding: 0 var(--space-6);
-//     font-size: var(--text-base);
+//     font-size: var(--font-size-base);
 //     border-radius: var(--radius-lg);
 //     gap: var(--space-2);
 //   `
