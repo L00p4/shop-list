@@ -8,20 +8,36 @@ import Button from '../button'
 
 export { default as CardItemsListSkeleton } from './card-items-list.skeleton'
 
-const CardItemsList = () => (
+type CardItemsListProps = {
+  title: string
+  itemsCount: number
+  lastPurchaseDate: string
+  creationDate: string
+  onEditClick: () => void
+  onBuyClick: () => void
+}
+
+const CardItemsList = ({
+  title,
+  itemsCount,
+  lastPurchaseDate,
+  creationDate,
+  onEditClick,
+  onBuyClick
+}: CardItemsListProps) => (
   <WrapperCardItemsList>
-    <h2>nome da lista aqui</h2>
+    <h2>{title}</h2>
     <ContentCardItemContainer>
       <ContentCardItem>
-        <p>12 itens •</p>
-        <p>data última compra</p>
-        <p>data criação lislta</p>
+        <p className="items-count">{itemsCount} itens</p>
+        <p>Última compra {lastPurchaseDate}</p>
+        <p>Criada em {creationDate}</p>
       </ContentCardItem>
       <ButtonContainerCardItem>
-        <Button variant="primary" size="small">
+        <Button onClick={onEditClick} variant="primary" size="compact">
           ver/edit
         </Button>
-        <Button variant="secondary" size="small">
+        <Button onClick={onBuyClick} variant="secondary" size="compact">
           comprar
         </Button>
       </ButtonContainerCardItem>

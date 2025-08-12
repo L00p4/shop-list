@@ -52,6 +52,13 @@ export const Danger: Story = {
 }
 
 // Size variations
+export const Compact: Story = {
+  args: {
+    children: 'Compact',
+    size: 'compact'
+  }
+}
+
 export const Small: Story = {
   args: {
     children: '+ Add',
@@ -171,6 +178,7 @@ export const AllSizes: Story = {
         flexWrap: 'wrap'
       }}
     >
+      <Button size="compact">Compact</Button>
       <Button size="small">Small</Button>
       <Button size="medium">Medium</Button>
       <Button size="large">Large</Button>

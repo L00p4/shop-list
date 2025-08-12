@@ -8,6 +8,8 @@ const GlobalStyles = createGlobalStyle`
     --bg-primary: #0f0f0f;        /* Fundo principal da app */
     --bg-secondary: #1a1a2e;      /* Fundo de seções/cards elevados */
     --bg-tertiary: #2a2a3e;       /* Fundo de cards/elementos */
+    --bg-light: #374151;          /* Fundo claro para contrastes */
+    --bg-extra-light: #4b5563;    /* Fundo muito claro */
     --bg-modal: rgba(0, 0, 0, 0.8); /* Overlay de modals */
 
     /* Colors - Purple Brand */
@@ -40,8 +42,8 @@ const GlobalStyles = createGlobalStyle`
 
     /* Colors - Border Hierarchy */
     --border-subtle: #333;        /* Bordas sutis, divisores */
-    --border-default: #374151;    /* Bordas padrão */
-    --border-emphasis: #4b5563;   /* Bordas com ênfase */
+    --border-default: var(--bg-light);    /* Bordas padrão */
+    --border-emphasis: var(--bg-extra-light);   /* Bordas com ênfase */
     --border-focus: var(--purple-500); /* Bordas de foco */
 
     /* Typography - Sizes */

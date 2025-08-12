@@ -14,16 +14,16 @@ module.exports = (plop) => {
 
     // actions to perform
     actions: [
-      {
-        type: 'add',
-        path: '../src/ui/{{dashCase name}}/{{dashCase name}}.composition.tsx',
-        templateFile: './templates/composition.tsx.hbs'
-      },
-      {
-        type: 'add',
-        path: '../src/ui/{{dashCase name}}/{{dashCase name}}.docs.mdx',
-        templateFile: './templates/doc.mdx.hbs'
-      },
+      // {
+      //   type: 'add',
+      //   path: '../src/ui/{{dashCase name}}/{{dashCase name}}.composition.tsx',
+      //   templateFile: './templates/composition.tsx.hbs'
+      // },
+      // {
+      //   type: 'add',
+      //   path: '../src/ui/{{dashCase name}}/{{dashCase name}}.docs.mdx',
+      //   templateFile: './templates/doc.mdx.hbs'
+      // },
       {
         type: 'add',
         path: '../src/ui/{{dashCase name}}/index.tsx',
@@ -34,11 +34,11 @@ module.exports = (plop) => {
         path: '../src/ui/{{dashCase name}}/{{dashCase name}}.skeleton.tsx',
         templateFile: './templates/skeleton.tsx.hbs'
       },
-      {
-        type: 'add',
-        path: '../src/ui/{{dashCase name}}/{{dashCase name}}.spec.tsx',
-        templateFile: './templates/spec.tsx.hbs'
-      },
+      // {
+      //   type: 'add',
+      //   path: '../src/ui/{{dashCase name}}/{{dashCase name}}.spec.tsx',
+      //   templateFile: './templates/spec.tsx.hbs'
+      // },
       {
         type: 'add',
         path: '../src/ui/{{dashCase name}}/{{dashCase name}}.stories.tsx',
