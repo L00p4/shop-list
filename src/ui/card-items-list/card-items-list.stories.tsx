@@ -11,10 +11,7 @@ const meta: Meta<typeof CardItemsList> = {
     onBuyClick: () => alert('Comprar itens')
   },
   parameters: {
-    layout: 'centered',
-    backgrounds: {
-      default: 'dark'
-    }
+    layout: 'centered'
   }
 }
 
