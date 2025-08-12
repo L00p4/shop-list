@@ -11,7 +11,7 @@ export { default as CardItemsListSkeleton } from './card-items-list.skeleton'
 type CardItemsListProps = {
   title: string
   itemsCount: number
-  lastPurchaseDate: string
+  lastPurchaseDate?: string
   creationDate: string
   onEditClick: () => void
   onBuyClick: () => void
@@ -30,15 +30,17 @@ const CardItemsList = ({
     <ContentCardItemContainer>
       <ContentCardItem>
         <p className="items-count">{itemsCount} itens</p>
-        <p>Última compra {lastPurchaseDate}</p>
+        {lastPurchaseDate && (
+          <p>Última compra {lastPurchaseDate} • R$ 150,00</p>
+        )}
         <p>Criada em {creationDate}</p>
       </ContentCardItem>
       <ButtonContainerCardItem>
-        <Button onClick={onEditClick} variant="primary" size="compact">
-          ver/edit
+        <Button onClick={onEditClick} variant="secondary" size="compact">
+          Editar
         </Button>
-        <Button onClick={onBuyClick} variant="secondary" size="compact">
-          comprar
+        <Button onClick={onBuyClick} variant="primary" size="compact">
+          Comprar
         </Button>
       </ButtonContainerCardItem>
     </ContentCardItemContainer>

@@ -2,6 +2,8 @@ import React from 'react'
 
 import { WrapperButton } from './button.styles'
 
+export { default as ButtonSkeleton } from './button.skeleton'
+
 export type ButtonProps = {
   children: React.ReactNode
   variant?: 'primary' | 'secondary' | 'danger'
