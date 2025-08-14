@@ -11,12 +11,10 @@
 //   // Estado da lista selecionada
 //   const [selectedListId, setSelectedListId] = useState<string | null>(null)
 
-//   {
-//     return (
-//       <>
-//         {currentView === 'overview' && <ViewMinhasListas />}
-//         {/* {currentView === 'shopping' && <ViewShoppingList />} */}
-//       </>
-//     )
-//   }
+//   return (
+//     <>
+//       {currentView === 'overview' && <ViewMinhasListas />}
+//       {/* {currentView === 'shopping' && <ViewShoppingList />} */}
+//     </>
+//   )
 // }
