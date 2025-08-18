@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const WrapperCardItemsList = styled.div`
+export const WrapperCardShopList = styled.div`
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
@@ -36,9 +36,4 @@ export const ContentCardItem = styled.div`
   p.items-count {
     font-size: var(--font-size-sm);
   }
-`
-export const ButtonContainerCardItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
 `

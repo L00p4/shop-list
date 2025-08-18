@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import CardItemsList, { CardItemsListSkeleton } from '.'
+import CardShopList, { CardShopListSkeleton } from '.'
 
-const meta: Meta<typeof CardItemsList> = {
-  title: 'Ui / Card ItemsList',
-  component: CardItemsList,
+const meta: Meta<typeof CardShopList> = {
+  title: 'Ui / Card Shop List',
+  component: CardShopList,
   tags: ['autodocs'],
   args: {
     onEditClick: () => alert('Editar lista'),
@@ -15,7 +15,7 @@ const meta: Meta<typeof CardItemsList> = {
   }
 }
 
-type Story = StoryObj<typeof CardItemsList>
+type Story = StoryObj<typeof CardShopList>
 
 export const Primary: Story = {
   args: {
@@ -35,7 +35,7 @@ export const Secondary: Story = {
 }
 
 export const Skeleton: Story = {
-  render: () => <CardItemsListSkeleton />,
+  render: () => <CardShopListSkeleton />,
   args: {}
 }
 

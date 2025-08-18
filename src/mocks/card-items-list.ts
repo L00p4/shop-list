@@ -1,4 +1,4 @@
-// export const mockCardItemsList = [
+// export const mockCardShopList = [
 //   {
 //     title: 'Lista de Compras',
 //     itemsCount: 12,
