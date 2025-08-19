@@ -4,6 +4,11 @@ import { ButtonContainerItem, WrapperItem } from './item.styles'
 export { default as ItemSkeleton } from './item.skeleton'
 
 type ItemProps = {
+  id: string
+  name: string
+  category?: string
+  estimatedPrice?: number
+  notes?: string
   onEditClick: () => void
   onAddClick: () => void
 }

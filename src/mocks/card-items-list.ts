@@ -147,7 +147,7 @@
 // TYPES
 // ========================================
 
-export type ShoppingItem = {
+export type Item = {
   id: string
   name: string
   category?: string
@@ -158,7 +158,7 @@ export type ShoppingItem = {
 export type ShoppingList = {
   id: string
   name: string
-  items: ShoppingItem[]
+  items: Array<Item>
   createdAt: string
   updatedAt: string
 }
