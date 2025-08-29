@@ -52,6 +52,21 @@ const buttonVariants = {
       background: var(--error-light);
       transform: translateY(1px);
     }
+  `,
+  warning: css`
+    background: var(--warning);
+    color: var(--text-primary);
+    border: 1px solid var(--warning);
+
+    &:hover:not(:disabled) {
+      background: var(--warning-light);
+      border-color: var(--warning-light);
+    }
+
+    &:active:not(:disabled) {
+      background: var(--warning-light);
+      transform: translateY(1px);
+    }
   `
 }
 

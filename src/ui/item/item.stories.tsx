@@ -12,7 +12,25 @@ const meta: Meta<typeof Item> = {
 type Story = StoryObj<typeof Item>
 
 export const Primary: Story = {
-  args: {}
+  args: {
+    name: 'Arroz',
+    status: 'default',
+    measure: 'unit',
+    onEditClick: () => {},
+    onAddClick: () => {},
+    onWeightClick: () => {}
+  }
+}
+
+export const OnCartUnit: Story = {
+  args: {
+    name: 'Café',
+    status: 'cart',
+    measure: 'unit',
+    onEditClick: () => {},
+    onAddClick: () => {},
+    onWeightClick: () => {}
+  }
 }
 
 export const Skeleton: Story = {

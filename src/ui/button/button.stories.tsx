@@ -51,6 +51,13 @@ export const Danger: Story = {
   }
 }
 
+export const Warning: Story = {
+  args: {
+    children: '⚖️ Pesar',
+    variant: 'warning'
+  }
+}
+
 // Size variations
 export const Compact: Story = {
   args: {
@@ -156,6 +163,7 @@ export const AllVariants: Story = {
       <Button variant="primary">Primary</Button>
       <Button variant="secondary">Secondary</Button>
       <Button variant="danger">Danger</Button>
+      <Button variant="warning">Warning</Button>
     </div>
   ),
   parameters: {
