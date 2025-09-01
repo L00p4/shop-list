@@ -1,6 +1,11 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-export const WrapperItem = styled.div`
+type WrapperItemProps = {
+  status: 'default' | 'cart'
+  measure: 'kg' | 'unit'
+}
+
+export const WrapperItem = styled.div<WrapperItemProps>`
   display: flex;
   gap: var(--space-4);
   justify-content: space-between;
@@ -11,6 +16,18 @@ export const WrapperItem = styled.div`
   border-left: var(--space-1) solid var(--purple-500);
 
   background-color: var(--bg-tertiary);
+
+  ${({ status }) =>
+    status === 'cart' &&
+    css`
+      border-left-color: var(--success);
+    `}
+
+  ${({ measure }) =>
+    measure === 'kg' &&
+    css`
+      border-left-color: var(--warning);
+    `}
 `
 
 export const LeftContentContainerItem = styled.div`

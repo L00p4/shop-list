@@ -33,6 +33,17 @@ export const OnCartUnit: Story = {
   }
 }
 
+export const OnCartKg: Story = {
+  args: {
+    name: 'Frango',
+    status: 'cart',
+    measure: 'kg',
+    onEditClick: () => {},
+    onAddClick: () => {},
+    onWeightClick: () => {}
+  }
+}
+
 export const Skeleton: Story = {
   render: () => <ItemSkeleton />,
   args: {}

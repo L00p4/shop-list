@@ -27,7 +27,7 @@ const Item = ({
   onAddClick,
   onWeightClick
 }: ItemProps) => (
-  <WrapperItem>
+  <WrapperItem status={status} measure={measure}>
     <LeftContentContainerItem>
       <h2>{name}</h2>
       {status === 'cart' && <p>2x R$ 12,90 cada</p>}
