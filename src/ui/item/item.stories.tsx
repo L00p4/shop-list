@@ -33,7 +33,18 @@ export const OnCartUnit: Story = {
   }
 }
 
-export const OnCartKg: Story = {
+export const OnCartKgNotWeight: Story = {
+  args: {
+    name: 'Frango',
+    status: 'cart',
+    measure: 'kg',
+    onEditClick: () => {},
+    onAddClick: () => {},
+    onWeightClick: () => {}
+  }
+}
+
+export const OnCartKgWithWeight: Story = {
   args: {
     name: 'Frango',
     status: 'cart',
