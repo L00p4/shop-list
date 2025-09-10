@@ -1,17 +1,8 @@
-import styled, { css, keyframes } from 'styled-components'
-
-const pulse = keyframes`
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
-`
+import styled, { css } from 'styled-components'
 
 type WrapperItemProps = {
   status: 'default' | 'cart'
-  measure: 'kg' | 'unit'
+  measure?: 'kg' | 'unit'
   weight?: number
 }
 
@@ -33,18 +24,12 @@ export const WrapperItem = styled.div<WrapperItemProps>`
       border-left-color: var(--success);
     `}
 
-  ${({ measure }) =>
-    measure === 'kg' &&
-    css`
-      border-left-color: var(--warning);
-    `}
-
-    ${({ status, measure, weight }) =>
+  ${({ status, measure, weight }) =>
     status === 'cart' &&
     measure === 'kg' &&
     (!weight || weight === 0) &&
     css`
-      animation: ${pulse} 2s infinite;
+      border-left-color: var(--warning);
     `}
 `
 

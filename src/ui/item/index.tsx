@@ -14,7 +14,7 @@ type ItemProps = {
   // id: string
   name: string
   status: 'default' | 'cart'
-  measure: 'kg' | 'unit'
+  measure?: 'kg' | 'unit'
   unitPrice?: number
   quantity?: number
   weight?: number
@@ -26,7 +26,7 @@ type ItemProps = {
 
 const renderProductInfo = (
   status: string,
-  measure: string,
+  measure?: string,
   weight?: number,
   unitPrice?: number,
   quantity?: number
@@ -62,7 +62,7 @@ const renderProductInfo = (
 
 const renderTotalValue = (
   status: string,
-  measure: string,
+  measure?: string,
   weight?: number,
   total?: number
 ): JSX.Element | null => {
@@ -83,7 +83,7 @@ const shouldShowAddButton = (status: string): boolean => {
 
 const shouldShowWeightButton = (
   status: string,
-  measure: string,
+  measure?: string,
   weight?: number
 ): boolean => {
   return status === 'cart' && measure === 'kg' && (!weight || weight === 0)
@@ -101,7 +101,7 @@ const Item = ({
   onAddClick,
   onWeightClick
 }: ItemProps) => (
-  <WrapperItem status={status} measure={measure}>
+  <WrapperItem status={status} measure={measure} weight={weight}>
     <LeftContentContainerItem>
       <h2>{name}</h2>
       {renderProductInfo(status, measure, weight, unitPrice, quantity)}
