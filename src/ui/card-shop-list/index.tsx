@@ -1,3 +1,4 @@
+import { ModelItem } from '@/models'
 import {
   ContentCardItem,
   WrapperCardShopList,
@@ -9,7 +10,7 @@ export { default as CardShopListSkeleton } from './card-shop-list.skeleton'
 export type ShoppingList = {
   id: string
   name: string
-  // items: Item[]
+  items: Array<ModelItem>
   createdAt: string
   updatedAt: string
 }
