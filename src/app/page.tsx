@@ -1,20 +1,16 @@
-// 'use client'
+'use client'
 
-// import ViewMinhasListas from '@/views/view-minhas-listas'
-// import { useState } from 'react'
+import ViewMinhasListas from '@/views/view-minhas-listas'
 
-// export default function Home() {
-//   // Estado de navegação
-//   const [currentView, setCurrentView] = useState<'overview' | 'shopping'>(
-//     'overview'
-//   )
-//   // Estado da lista selecionada
-//   const [selectedListId, setSelectedListId] = useState<string | null>(null)
-
-//   return (
-//     <>
-//       {currentView === 'overview' && <ViewMinhasListas />}
-//       {/* {currentView === 'shopping' && <ViewShoppingList />} */}
-//     </>
-//   )
-// }
+export default function Home() {
+  return (
+    <ViewMinhasListas
+      lists={[]}
+      onCreateList={() => console.log('Criar lista')}
+      onEditList={(id) => console.log('Editar:', id)}
+      onStartShopping={(id) => console.log('Comprar:', id)}
+      onViewPurchase={(id) => console.log('Ver:', id)}
+      onRepeatList={(id) => console.log('Repetir:', id)}
+    />
+  )
+}
