@@ -1,4 +1,5 @@
 import { JSX } from 'react'
+import { Pencil, Scale, AlertTriangle } from 'lucide-react'
 import Button from '../button'
 import {
   ButtonContainerItem,
@@ -54,7 +55,11 @@ const renderProductInfo = (
   }
 
   if (isCartWeightNotWeighed) {
-    return <p>⚠️ Aguardando pesagem</p>
+    return (
+      <p>
+        <AlertTriangle size={14} /> Aguardando pesagem
+      </p>
+    )
   }
 
   return null
@@ -114,7 +119,7 @@ const Item = ({
 
       <ButtonContainerItem>
         <Button onClick={onEditClick} variant="secondary" size="small">
-          ✏️
+          <Pencil size={14} />
         </Button>
         {shouldShowAddButton(status) && (
           <Button onClick={onAddClick} variant="primary" size="small">
@@ -123,7 +128,7 @@ const Item = ({
         )}
         {shouldShowWeightButton(status, measure, weight) && (
           <Button onClick={onWeightClick} variant="warning" size="small">
-            ⚖️ Pesar
+            <Scale size={14} /> Pesar
           </Button>
         )}
       </ButtonContainerItem>

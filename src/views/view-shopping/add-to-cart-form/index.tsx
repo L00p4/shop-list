@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Package, Scale } from 'lucide-react'
 import Button from '../../../ui/button'
 import Input from '../../../ui/input'
 import {
@@ -74,14 +75,14 @@ const AddToCartForm = ({
             $active={measure === 'unit'}
             onClick={() => setMeasure('unit')}
           >
-            📦 Unidades
+            <Package size={14} /> Unidades
           </MeasureOption>
           <MeasureOption
             type="button"
             $active={measure === 'kg'}
             onClick={() => setMeasure('kg')}
           >
-            ⚖️ Peso
+            <Scale size={14} /> Peso
           </MeasureOption>
         </MeasureToggle>
 

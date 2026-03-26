@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { ArrowLeft } from 'lucide-react'
 import Button from '../../ui/button'
 import Modal from '../../ui/modal'
 import { type Item } from '../../mocks'
@@ -99,7 +100,7 @@ const ViewShopping = ({
     <WrapperViewShopping>
       <Header>
         <Button variant="secondary" size="small" onClick={onBack}>
-          ← Voltar
+          <ArrowLeft size={14} /> Voltar
         </Button>
         <h1>{listName}</h1>
         <Button size="small" onClick={() => setIsAddItemModalOpen(true)}>

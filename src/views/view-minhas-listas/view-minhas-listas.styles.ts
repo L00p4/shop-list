@@ -2,8 +2,13 @@ import styled from 'styled-components'
 
 export const WrapperViewMinhasListas = styled.div`
   padding: var(--space-4);
+  width: 100%;
   max-width: 600px;
   margin: 0 auto;
+
+  @media (max-width: 640px) {
+    max-width: 100%;
+  }
 `
 
 export const Header = styled.header`
@@ -30,10 +35,13 @@ export const ConfirmContent = styled.div`
   flex-direction: column;
   gap: var(--space-4);
   padding: var(--space-6);
-  min-width: 300px;
 `
 
 export const ConfirmTitle = styled.h2`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
   color: var(--text-primary);
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-semibold);

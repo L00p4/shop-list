@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { AlertTriangle, Scale, X, CheckCircle } from 'lucide-react'
 import Button from '../../../ui/button'
 import Input from '../../../ui/input'
 import Modal from '../../../ui/modal'
@@ -90,7 +91,9 @@ const TabCart = ({
           <CartItemDetails>
             <CartItemName>{item.name}</CartItemName>
             {needsWeighing(item) ? (
-              <CartItemPending>⚠️ Aguardando pesagem</CartItemPending>
+              <CartItemPending>
+                <AlertTriangle size={14} /> Aguardando pesagem
+              </CartItemPending>
             ) : (
               <CartItemInfo>
                 {item.measure === 'unit'
@@ -109,7 +112,7 @@ const TabCart = ({
                 setWeightValue('')
               }}
             >
-              ⚖️ Pesar
+              <Scale size={14} /> Pesar
             </Button>
           ) : (
             <CartItemPrice>{formatPrice(item.total)}</CartItemPrice>
@@ -120,7 +123,7 @@ const TabCart = ({
             size="compact"
             onClick={() => onRemoveItem(item.id)}
           >
-            ✕
+            <X size={14} />
           </Button>
         </CartItemRow>
       ))}
@@ -136,7 +139,7 @@ const TabCart = ({
         onClick={handleFinishClick}
         disabled={items.length === 0}
       >
-        ✅ Finalizar Compra
+        <CheckCircle size={16} /> Finalizar Compra
       </Button>
 
       <Modal isOpen={showConfirm} onClose={() => setShowConfirm(false)}>
@@ -160,7 +163,9 @@ const TabCart = ({
 
       <Modal isOpen={!!weighingItem} onClose={() => setWeighingItem(null)}>
         <ConfirmContent>
-          <ConfirmTitle>⚖️ {weighingItem?.name}</ConfirmTitle>
+          <ConfirmTitle>
+            <Scale size={20} /> {weighingItem?.name}
+          </ConfirmTitle>
           <ConfirmMessage>
             Preço: {weighingItem && formatPrice(weighingItem.unitPrice)} por kg
           </ConfirmMessage>

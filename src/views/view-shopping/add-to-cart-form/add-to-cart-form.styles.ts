@@ -9,7 +9,6 @@ export const WrapperAddToCartForm = styled.div`
   flex-direction: column;
   gap: var(--space-4);
   padding: var(--space-6);
-  min-width: 320px;
 `
 
 export const FormTitle = styled.h2`

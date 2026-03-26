@@ -1,9 +1,18 @@
 import { useState } from 'react'
+import {
+  MoreVertical,
+  Pencil,
+  Share2,
+  Trash2,
+  ClipboardList,
+  Eye,
+  ShoppingCart
+} from 'lucide-react'
 import Button from '../../ui/button'
 import {
   ContentCardItem,
   WrapperCardShopList,
-  ContentCardItemContainer,
+  CardHeader,
   ButtonsContainer,
   MenuWrapper,
   MenuButton,
@@ -56,10 +65,12 @@ const CardShopList = ({
 
   return (
     <WrapperCardShopList hasHistory={hasHistory}>
-      <ContentCardItemContainer>
+      <CardHeader>
         <h2>{list.name}</h2>
         <MenuWrapper>
-          <MenuButton onClick={() => setMenuOpen(!menuOpen)}>⋮</MenuButton>
+          <MenuButton onClick={() => setMenuOpen(!menuOpen)}>
+            <MoreVertical size={18} />
+          </MenuButton>
           {menuOpen && (
             <MenuDropdown>
               <MenuItem
@@ -68,7 +79,7 @@ const CardShopList = ({
                   setMenuOpen(false)
                 }}
               >
-                ✏️ Renomear
+                <Pencil size={14} /> Renomear
               </MenuItem>
               <MenuItem
                 onClick={() => {
@@ -76,7 +87,7 @@ const CardShopList = ({
                   setMenuOpen(false)
                 }}
               >
-                📤 Compartilhar
+                <Share2 size={14} /> Compartilhar
               </MenuItem>
               <MenuItem
                 onClick={() => {
@@ -84,51 +95,49 @@ const CardShopList = ({
                   setMenuOpen(false)
                 }}
               >
-                🗑️ Excluir
+                <Trash2 size={14} /> Excluir
               </MenuItem>
             </MenuDropdown>
           )}
         </MenuWrapper>
-      </ContentCardItemContainer>
+      </CardHeader>
 
-      <ContentCardItemContainer>
-        <ContentCardItem>
-          <p className="items-count">{itemsCount} itens</p>
-          {hasHistory && list.lastPurchaseDate && (
-            <p>
-              Última compra {formatDate(list.lastPurchaseDate)}
-              {list.lastPurchaseTotal &&
-                ` • R$ ${list.lastPurchaseTotal.toFixed(2)}`}
-            </p>
-          )}
-          <p>Criada {createdDate}</p>
-        </ContentCardItem>
+      <ContentCardItem>
+        <p className="items-count">{itemsCount} itens</p>
+        {hasHistory && list.lastPurchaseDate && (
+          <p>
+            Última compra {formatDate(list.lastPurchaseDate)}
+            {list.lastPurchaseTotal &&
+              ` • R$ ${list.lastPurchaseTotal.toFixed(2)}`}
+          </p>
+        )}
+        <p>Criada {createdDate}</p>
+      </ContentCardItem>
 
-        <ButtonsContainer>
-          <Button variant="secondary" size="small" onClick={onEdit}>
-            📋 Editar
-          </Button>
-          {hasHistory ? (
-            <>
-              <Button variant="secondary" size="small" onClick={onViewPurchase}>
-                👁️ Ver
-              </Button>
-              <Button variant="primary" size="small" onClick={onRepeatList}>
-                🛒 Repetir
-              </Button>
-            </>
-          ) : (
-            <Button
-              variant="primary"
-              size="small"
-              onClick={onStartShopping}
-              disabled={itemsCount === 0}
-            >
-              🛒 Comprar
+      <ButtonsContainer>
+        <Button variant="secondary" size="small" onClick={onEdit}>
+          <ClipboardList size={14} /> Editar
+        </Button>
+        {hasHistory ? (
+          <>
+            <Button variant="secondary" size="small" onClick={onViewPurchase}>
+              <Eye size={14} /> Ver
             </Button>
-          )}
-        </ButtonsContainer>
-      </ContentCardItemContainer>
+            <Button variant="primary" size="small" onClick={onRepeatList}>
+              <ShoppingCart size={14} /> Repetir
+            </Button>
+          </>
+        ) : (
+          <Button
+            variant="primary"
+            size="small"
+            onClick={onStartShopping}
+            disabled={itemsCount === 0}
+          >
+            <ShoppingCart size={14} /> Comprar
+          </Button>
+        )}
+      </ButtonsContainer>
     </WrapperCardShopList>
   )
 }

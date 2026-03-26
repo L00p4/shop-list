@@ -14,12 +14,15 @@ export const WrapperModal = styled.div`
   background: var(--bg-secondary);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
-  max-width: 90%;
   width: 100%;
+  max-width: 480px;
   margin: 0 var(--space-4);
+
+  @media (max-width: 640px) {
+    max-width: calc(100% - var(--space-8));
+  }
 `
 
 export const WrapperContent = styled.div`
-  padding: var(--space-4);
   color: var(--text-primary);
 `

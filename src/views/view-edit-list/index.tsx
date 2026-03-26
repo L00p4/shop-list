@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { ArrowLeft, Pencil, X } from 'lucide-react'
 import Button from '../../ui/button'
 import Modal from '../../ui/modal'
 import ItemForm from './item-form'
@@ -55,7 +56,7 @@ const ViewEditList = ({
     <WrapperViewEditList>
       <Header>
         <Button variant="secondary" size="small" onClick={onBack}>
-          ← Voltar
+          <ArrowLeft size={14} /> Voltar
         </Button>
         <h1>{listName}</h1>
         <Button size="small" onClick={() => setModal({ type: 'add' })}>
@@ -85,14 +86,14 @@ const ViewEditList = ({
                   })
                 }
               >
-                ✏️
+                <Pencil size={14} />
               </Button>
               <Button
                 variant="danger"
                 size="compact"
                 onClick={() => onRemoveItem(item.id)}
               >
-                ✕
+                <X size={14} />
               </Button>
             </ItemActions>
           </ItemRow>

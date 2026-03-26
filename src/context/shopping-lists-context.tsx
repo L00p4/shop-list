@@ -69,23 +69,27 @@ export const ShoppingListsProvider = ({
 }) => {
   const [lists, setLists] = useState<ShoppingList[]>([])
   const [cart, setCart] = useState<Cart | null>(null)
+  const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
     setLists(loadFromStorage<ShoppingList[]>(STORAGE_KEY, []))
     setCart(loadFromStorage<Cart | null>(CART_STORAGE_KEY, null))
+    setLoaded(true)
   }, [])
 
   useEffect(() => {
+    if (!loaded) return
     saveToStorage(STORAGE_KEY, lists)
-  }, [lists])
+  }, [lists, loaded])
 
   useEffect(() => {
+    if (!loaded) return
     if (cart) {
       saveToStorage(CART_STORAGE_KEY, cart)
     } else {
       localStorage.removeItem(CART_STORAGE_KEY)
     }
-  }, [cart])
+  }, [cart, loaded])
 
   // === List operations ===
 

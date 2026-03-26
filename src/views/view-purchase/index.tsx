@@ -1,3 +1,4 @@
+import { ArrowLeft } from 'lucide-react'
 import Button from '../../ui/button'
 import {
   WrapperViewPurchase,
@@ -54,7 +55,7 @@ const ViewPurchase = ({
   <WrapperViewPurchase>
     <Header>
       <Button variant="secondary" size="small" onClick={onBack}>
-        ← Voltar
+        <ArrowLeft size={14} /> Voltar
       </Button>
       <h1>{listName}</h1>
     </Header>

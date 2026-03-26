@@ -33,6 +33,9 @@ export const CartItemInfo = styled.span`
 `
 
 export const CartItemPending = styled.span`
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
   color: var(--warning);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
@@ -79,10 +82,13 @@ export const ConfirmContent = styled.div`
   flex-direction: column;
   gap: var(--space-4);
   padding: var(--space-6);
-  min-width: 300px;
 `
 
 export const ConfirmTitle = styled.h2`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
   color: var(--text-primary);
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-semibold);

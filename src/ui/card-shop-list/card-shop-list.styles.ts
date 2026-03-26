@@ -9,7 +9,7 @@ export const WrapperCardShopList = styled.div.withConfig({
 })<WrapperProps>`
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-3);
 
   padding: var(--space-4);
   border-radius: var(--radius-lg);
@@ -22,21 +22,21 @@ export const WrapperCardShopList = styled.div.withConfig({
     color: var(--text-primary);
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-medium);
+    flex: 1;
   }
 `
 
-export const ContentCardItemContainer = styled.div`
+export const CardHeader = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  gap: var(--space-4);
-  align-items: flex-start;
+  gap: var(--space-2);
 `
 
 export const ContentCardItem = styled.div`
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
-  flex: 1;
 
   color: var(--text-tertiary);
   font-size: var(--font-size-sm);
@@ -49,8 +49,8 @@ export const ContentCardItem = styled.div`
 
 export const ButtonsContainer = styled.div`
   display: flex;
+  justify-content: flex-end;
   gap: var(--space-2);
-  flex-shrink: 0;
 `
 
 export const MenuWrapper = styled.div`
@@ -84,7 +84,9 @@ export const MenuDropdown = styled.div`
 `
 
 export const MenuItem = styled.button`
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
   width: 100%;
   padding: var(--space-3) var(--space-4);
   text-align: left;

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Download, Upload, Check, Copy } from 'lucide-react'
 import Button from '../../ui/button'
 import Modal from '../../ui/modal'
 import Input from '../../ui/input'
@@ -130,7 +131,7 @@ const ViewMinhasListas = ({
             variant="secondary"
             onClick={() => setModal({ type: 'import' })}
           >
-            📥 Importar
+            <Download size={14} /> Importar
           </Button>
           <Button size="small" onClick={() => setModal({ type: 'create' })}>
             + Nova
@@ -196,7 +197,9 @@ const ViewMinhasListas = ({
 
       <Modal isOpen={modal.type === 'share'} onClose={closeModal}>
         <ConfirmContent>
-          <ConfirmTitle>📤 Compartilhar Lista</ConfirmTitle>
+          <ConfirmTitle>
+            <Upload size={20} /> Compartilhar Lista
+          </ConfirmTitle>
           <ConfirmMessage>
             Copie o link abaixo e envie para quem quiser compartilhar.
           </ConfirmMessage>
@@ -210,7 +213,15 @@ const ViewMinhasListas = ({
               Fechar
             </Button>
             <Button variant="primary" onClick={handleCopyUrl}>
-              {copied ? '✅ Copiado!' : '📋 Copiar Link'}
+              {copied ? (
+                <>
+                  <Check size={14} /> Copiado!
+                </>
+              ) : (
+                <>
+                  <Copy size={14} /> Copiar Link
+                </>
+              )}
             </Button>
           </ConfirmActions>
         </ConfirmContent>
@@ -218,7 +229,9 @@ const ViewMinhasListas = ({
 
       <Modal isOpen={modal.type === 'import'} onClose={closeModal}>
         <ConfirmContent>
-          <ConfirmTitle>📥 Importar Lista</ConfirmTitle>
+          <ConfirmTitle>
+            <Download size={20} /> Importar Lista
+          </ConfirmTitle>
           <ConfirmMessage>
             Cole o link que você recebeu para importar a lista.
           </ConfirmMessage>

@@ -6,14 +6,19 @@ type TabProps = {
 
 export const WrapperViewShopping = styled.div`
   padding: var(--space-4);
+  width: 100%;
   max-width: 600px;
   margin: 0 auto;
+
+  @media (max-width: 640px) {
+    max-width: 100%;
+  }
 `
 
 export const Header = styled.header`
   display: flex;
   align-items: center;
-  gap: var(--space-4);
+  justify-content: space-between;
   margin-bottom: var(--space-4);
 
   h1 {
