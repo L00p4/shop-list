@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#0f0f0f"/>
+  <rect x="0" y="0" width="1200" height="4" fill="#8b5cf6"/>
+  
+  <!-- Cart icon -->
+  <path d="M540 240h20l10 20h130l-20 80H570l-20-80" stroke="#8b5cf6" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="580" cy="355" r="8" fill="#8b5cf6"/>
+  <circle cx="650" cy="355" r="8" fill="#8b5cf6"/>
+  
+  <!-- Title -->
+  <text x="600" y="430" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="48" font-weight="700" fill="#ffffff">Lista de Compras</text>
+  
+  <!-- Description -->
+  <text x="600" y="480" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="22" fill="#9ca3af">Crie listas de compras, controle preços e confira no caixa</text>
+</svg>
