@@ -60,7 +60,9 @@ const inputVariants = {
   `
 }
 
-export const WrapperInput = styled.div<WrapperInputProps>`
+export const WrapperInput = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['fullWidth'].includes(prop)
+})<WrapperInputProps>`
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
@@ -81,7 +83,9 @@ export const Label = styled.label`
   cursor: pointer;
 `
 
-export const StyledInput = styled.input<StyledInputProps>`
+export const StyledInput = styled.input.withConfig({
+  shouldForwardProp: (prop) => !['variant', 'hasError'].includes(prop)
+})<StyledInputProps>`
   /* Reset */
   outline: none;
   font-family: inherit;

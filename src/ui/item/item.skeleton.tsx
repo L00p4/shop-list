@@ -1,7 +1,7 @@
 import { WrapperItem } from './item.styles'
 
 const ItemSkeleton = () => (
-  <WrapperItem>
+  <WrapperItem status="default">
     <h1 className="skeleton">Item</h1>
   </WrapperItem>
 )

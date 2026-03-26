@@ -161,6 +161,15 @@ export type ShoppingList = {
   items: Array<Item>
   createdAt: string
   updatedAt: string
+  lastPurchaseDate?: string
+  lastPurchaseTotal?: number
+  lastPurchaseItems?: Array<{
+    name: string
+    measure: 'unit' | 'kg'
+    quantity: number
+    unitPrice: number
+    total: number
+  }>
 }
 
 export type PurchasedItem = {

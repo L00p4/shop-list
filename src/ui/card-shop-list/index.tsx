@@ -1,27 +1,27 @@
+import { useState } from 'react'
 import Button from '../../ui/button'
 import {
   ContentCardItem,
   WrapperCardShopList,
   ContentCardItemContainer,
-  ButtonsContainer
+  ButtonsContainer,
+  MenuWrapper,
+  MenuButton,
+  MenuDropdown,
+  MenuItem
 } from './card-shop-list.styles'
-import { Item } from '../../mocks'
+import { type ShoppingList } from '../../mocks'
 
 export { default as CardShopListSkeleton } from './card-shop-list.skeleton'
 
-export type ShoppingList = {
-  id: string
-  name: string
-  items: Array<Item>
-  createdAt: string
-  updatedAt: string
-  lastPurchaseDate?: string
-  lastPurchaseTotal?: number
-}
+export type { ShoppingList }
 
 type CardShopListProps = {
   list: ShoppingList
   onEdit?: () => void
+  onEditName?: () => void
+  onDelete?: () => void
+  onShare?: () => void
   onStartShopping?: () => void
   onViewPurchase?: () => void
   onRepeatList?: () => void
@@ -42,6 +42,9 @@ const formatDate = (dateString: string) => {
 const CardShopList = ({
   list,
   onEdit,
+  onEditName,
+  onDelete,
+  onShare,
   onStartShopping,
   onViewPurchase,
   onRepeatList
@@ -49,10 +52,45 @@ const CardShopList = ({
   const hasHistory = !!list.lastPurchaseDate
   const createdDate = formatDate(list.createdAt)
   const itemsCount = list.items.length
+  const [menuOpen, setMenuOpen] = useState(false)
 
   return (
     <WrapperCardShopList hasHistory={hasHistory}>
-      <h2>{list.name}</h2>
+      <ContentCardItemContainer>
+        <h2>{list.name}</h2>
+        <MenuWrapper>
+          <MenuButton onClick={() => setMenuOpen(!menuOpen)}>⋮</MenuButton>
+          {menuOpen && (
+            <MenuDropdown>
+              <MenuItem
+                onClick={() => {
+                  onEditName?.()
+                  setMenuOpen(false)
+                }}
+              >
+                ✏️ Renomear
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  onShare?.()
+                  setMenuOpen(false)
+                }}
+              >
+                📤 Compartilhar
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  onDelete?.()
+                  setMenuOpen(false)
+                }}
+              >
+                🗑️ Excluir
+              </MenuItem>
+            </MenuDropdown>
+          )}
+        </MenuWrapper>
+      </ContentCardItemContainer>
+
       <ContentCardItemContainer>
         <ContentCardItem>
           <p className="items-count">{itemsCount} itens</p>
@@ -67,6 +105,9 @@ const CardShopList = ({
         </ContentCardItem>
 
         <ButtonsContainer>
+          <Button variant="secondary" size="small" onClick={onEdit}>
+            📋 Editar
+          </Button>
           {hasHistory ? (
             <>
               <Button variant="secondary" size="small" onClick={onViewPurchase}>
@@ -77,14 +118,14 @@ const CardShopList = ({
               </Button>
             </>
           ) : (
-            <>
-              <Button variant="secondary" size="small" onClick={onEdit}>
-                📋 Editar
-              </Button>
-              <Button variant="primary" size="small" onClick={onStartShopping}>
-                🛒 Comprar
-              </Button>
-            </>
+            <Button
+              variant="primary"
+              size="small"
+              onClick={onStartShopping}
+              disabled={itemsCount === 0}
+            >
+              🛒 Comprar
+            </Button>
           )}
         </ButtonsContainer>
       </ContentCardItemContainer>

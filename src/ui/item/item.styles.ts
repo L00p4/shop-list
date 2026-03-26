@@ -6,7 +6,9 @@ type WrapperItemProps = {
   weight?: number
 }
 
-export const WrapperItem = styled.div<WrapperItemProps>`
+export const WrapperItem = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['status', 'measure', 'weight'].includes(prop)
+})<WrapperItemProps>`
   display: flex;
   gap: var(--space-4);
   justify-content: space-between;

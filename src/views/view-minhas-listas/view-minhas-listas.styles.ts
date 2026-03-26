@@ -24,3 +24,34 @@ export const ListsContainer = styled.div`
   flex-direction: column;
   gap: var(--space-4);
 `
+
+export const ConfirmContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  min-width: 300px;
+`
+
+export const ConfirmTitle = styled.h2`
+  color: var(--text-primary);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  text-align: center;
+`
+
+export const ConfirmMessage = styled.p`
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  text-align: center;
+  line-height: var(--leading-relaxed);
+`
+
+export const ConfirmActions = styled.div`
+  display: flex;
+  gap: var(--space-3);
+
+  button {
+    flex: 1;
+  }
+`

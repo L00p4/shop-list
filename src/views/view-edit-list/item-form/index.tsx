@@ -1,11 +1,9 @@
 import { useState } from 'react'
 import Button from '../../../ui/button'
 import Input from '../../../ui/input'
-import { WrapperListForm, FormActions, FormTitle } from './list-form.styles'
+import { WrapperItemForm, FormActions, FormTitle } from './item-form.styles'
 
-export { default as ListFormSkeleton } from './list-form.skeleton'
-
-type ListFormProps = {
+type ItemFormProps = {
   onSubmit: (name: string) => void
   onCancel: () => void
   initialName?: string
@@ -13,13 +11,13 @@ type ListFormProps = {
   submitLabel?: string
 }
 
-const ListForm = ({
+const ItemForm = ({
   onSubmit,
   onCancel,
   initialName = '',
-  title = 'Nova Lista',
-  submitLabel = 'Criar Lista'
-}: ListFormProps) => {
+  title = 'Novo Item',
+  submitLabel = 'Adicionar'
+}: ItemFormProps) => {
   const [name, setName] = useState(initialName)
   const [error, setError] = useState('')
 
@@ -29,12 +27,7 @@ const ListForm = ({
     const trimmedName = name.trim()
 
     if (!trimmedName) {
-      setError('Nome da lista é obrigatório')
-      return
-    }
-
-    if (trimmedName.length < 2) {
-      setError('Nome deve ter pelo menos 2 caracteres')
+      setError('Nome do item é obrigatório')
       return
     }
 
@@ -55,16 +48,16 @@ const ListForm = ({
   }
 
   return (
-    <WrapperListForm>
+    <WrapperItemForm>
       <FormTitle>{title}</FormTitle>
 
       <form onSubmit={handleSubmit}>
         <Input
-          label="Nome da lista"
+          label="Nome do item"
           value={name}
           onChange={handleNameChange}
           error={error}
-          placeholder="Ex: Compras da semana"
+          placeholder="Ex: Arroz 5kg"
           fullWidth
           autoFocus
         />
@@ -78,8 +71,8 @@ const ListForm = ({
           </Button>
         </FormActions>
       </form>
-    </WrapperListForm>
+    </WrapperItemForm>
   )
 }
 
-export default ListForm
+export default ItemForm
