@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     siteName: 'Lista de Compras',
     images: [
       {
-        url: 'https://l00p4.github.io/shop-list/img/og-image.svg',
+        url: 'https://l00p4.github.io/shop-list/img/carrinho_1200x630.jpg',
         width: 1200,
         height: 630,
         alt: 'Lista de Compras'
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Lista de Compras',
     description: 'Crie listas de compras, controle preços e confira no caixa',
-    images: ['https://l00p4.github.io/shop-list/img/og-image.svg']
+    images: ['https://l00p4.github.io/shop-list/img/carrinho_1200x630.jpg']
   }
 }
 
