@@ -10,8 +10,8 @@ export const metadata: Metadata = {
   title: 'Lista de Compras',
   description: 'Crie listas de compras, controle preços e confira no caixa',
   icons: {
-    icon: '/shop-list/favicon.svg',
-    shortcut: '/shop-list/favicon.svg'
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg'
   },
   openGraph: {
     title: 'Lista de Compras',

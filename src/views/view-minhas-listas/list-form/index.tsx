@@ -1,7 +1,12 @@
 import { useState } from 'react'
 import Button from '../../../ui/button'
 import Input from '../../../ui/input'
-import { WrapperListForm, FormActions, FormTitle } from './list-form.styles'
+import {
+  WrapperListForm,
+  FormActions,
+  FormTitle,
+  FormHint
+} from './list-form.styles'
 
 export { default as ListFormSkeleton } from './list-form.skeleton'
 
@@ -17,7 +22,7 @@ const ListForm = ({
   onSubmit,
   onCancel,
   initialName = '',
-  title = 'Nova Lista',
+  title = 'Criar nova lista de compras',
   submitLabel = 'Criar Lista'
 }: ListFormProps) => {
   const [name, setName] = useState(initialName)
@@ -60,14 +65,17 @@ const ListForm = ({
 
       <form onSubmit={handleSubmit}>
         <Input
-          label="Nome da lista"
+          label="Dê um nome para sua lista"
           value={name}
           onChange={handleNameChange}
           error={error}
-          placeholder="Ex: Compras da semana"
+          placeholder="Ex: Compras da semana, Churrasco, Limpeza..."
           fullWidth
           autoFocus
         />
+        <FormHint>
+          Você poderá adicionar os itens depois de criar a lista.
+        </FormHint>
 
         <FormActions>
           <Button type="button" variant="secondary" onClick={handleCancel}>

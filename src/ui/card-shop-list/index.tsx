@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import {
   MoreVertical,
   Pencil,
@@ -62,12 +62,26 @@ const CardShopList = ({
   const createdDate = formatDate(list.createdAt)
   const itemsCount = list.items.length
   const [menuOpen, setMenuOpen] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!menuOpen) return
+
+    const handleClickOutside = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setMenuOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [menuOpen])
 
   return (
-    <WrapperCardShopList hasHistory={hasHistory}>
+    <WrapperCardShopList hasHistory={hasHistory} onClick={onEdit}>
       <CardHeader>
         <h2>{list.name}</h2>
-        <MenuWrapper>
+        <MenuWrapper ref={menuRef} onClick={(e) => e.stopPropagation()}>
           <MenuButton onClick={() => setMenuOpen(!menuOpen)}>
             <MoreVertical size={18} />
           </MenuButton>
@@ -114,14 +128,14 @@ const CardShopList = ({
         <p>Criada {createdDate}</p>
       </ContentCardItem>
 
-      <ButtonsContainer>
+      <ButtonsContainer onClick={(e) => e.stopPropagation()}>
         <Button variant="secondary" size="small" onClick={onEdit}>
-          <ClipboardList size={14} /> Editar
+          <ClipboardList size={14} /> Ver itens
         </Button>
         {hasHistory ? (
           <>
             <Button variant="secondary" size="small" onClick={onViewPurchase}>
-              <Eye size={14} /> Ver
+              <Eye size={14} /> Última compra
             </Button>
             <Button variant="primary" size="small" onClick={onRepeatList}>
               <ShoppingCart size={14} /> Repetir

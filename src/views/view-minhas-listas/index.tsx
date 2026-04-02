@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Download, Upload, Check, Copy } from 'lucide-react'
+import { Download, Check } from 'lucide-react'
 import Button from '../../ui/button'
 import Modal from '../../ui/modal'
 import Input from '../../ui/input'
@@ -52,13 +52,11 @@ const ViewMinhasListas = ({
   const [modal, setModal] = useState<ModalState>({ type: 'closed' })
   const [importUrl, setImportUrl] = useState('')
   const [importMessage, setImportMessage] = useState('')
-  const [copied, setCopied] = useState(false)
 
   const closeModal = () => {
     setModal({ type: 'closed' })
     setImportUrl('')
     setImportMessage('')
-    setCopied(false)
   }
 
   const handleCreateList = (name: string) => {
@@ -80,16 +78,10 @@ const ViewMinhasListas = ({
     closeModal()
   }
 
-  const handleShare = (list: ShoppingList) => {
+  const handleShare = async (list: ShoppingList) => {
     const shareUrl = generateShareUrl(list)
+    await navigator.clipboard.writeText(shareUrl)
     setModal({ type: 'share', shareUrl })
-  }
-
-  const handleCopyUrl = async () => {
-    if (modal.type !== 'share') return
-    await navigator.clipboard.writeText(modal.shareUrl)
-    setCopied(true)
-    setTimeout(closeModal, 1500)
   }
 
   const handleImport = () => {
@@ -134,7 +126,7 @@ const ViewMinhasListas = ({
             <Download size={14} /> Importar
           </Button>
           <Button size="small" onClick={() => setModal({ type: 'create' })}>
-            + Nova
+            + Nova Lista
           </Button>
         </div>
       </Header>
@@ -198,30 +190,20 @@ const ViewMinhasListas = ({
       <Modal isOpen={modal.type === 'share'} onClose={closeModal}>
         <ConfirmContent>
           <ConfirmTitle>
-            <Upload size={20} /> Compartilhar Lista
+            <Check size={20} /> Link copiado!
           </ConfirmTitle>
           <ConfirmMessage>
-            Copie o link abaixo e envie para quem quiser compartilhar.
+            O link da lista foi copiado para a área de transferência. Envie para
+            quem quiser compartilhar.
           </ConfirmMessage>
-          <Input
-            value={modal.type === 'share' ? modal.shareUrl : ''}
-            readOnly
-            fullWidth
-          />
+          <ConfirmMessage>
+            Quem receber o link pode importá-lo clicando em &quot;Importar&quot;
+            na tela inicial. Se já tiver a lista, apenas os itens novos serão
+            adicionados.
+          </ConfirmMessage>
           <ConfirmActions>
-            <Button variant="secondary" onClick={closeModal}>
-              Fechar
-            </Button>
-            <Button variant="primary" onClick={handleCopyUrl}>
-              {copied ? (
-                <>
-                  <Check size={14} /> Copiado!
-                </>
-              ) : (
-                <>
-                  <Copy size={14} /> Copiar Link
-                </>
-              )}
+            <Button variant="primary" onClick={closeModal}>
+              Entendi
             </Button>
           </ConfirmActions>
         </ConfirmContent>

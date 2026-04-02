@@ -42,7 +42,6 @@ const ViewEditList = ({
 
   const handleAddItem = (name: string) => {
     onAddItem(name)
-    closeModal()
   }
 
   const handleEditItem = (name: string) => {

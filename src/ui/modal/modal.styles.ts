@@ -8,6 +8,8 @@ export const WrapperOverlay = styled.div`
   align-items: center;
   justify-content: center;
   z-index: var(--z-modal);
+  overflow-y: auto;
+  padding: var(--space-4) 0;
 `
 
 export const WrapperModal = styled.div`
@@ -16,7 +18,7 @@ export const WrapperModal = styled.div`
   box-shadow: var(--shadow-lg);
   width: 100%;
   max-width: 480px;
-  margin: 0 var(--space-4);
+  margin: auto var(--space-4);
 
   @media (max-width: 640px) {
     max-width: calc(100% - var(--space-8));

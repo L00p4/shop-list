@@ -14,13 +14,15 @@ export const WrapperViewPurchase = styled.div`
 export const Header = styled.header`
   display: flex;
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--space-3);
   margin-bottom: var(--space-2);
 
   h1 {
-    font-size: var(--font-size-2xl);
+    font-size: var(--font-size-xl);
     font-weight: var(--font-weight-semibold);
     color: var(--text-primary);
+    flex: 1;
+    word-break: break-word;
   }
 `
 

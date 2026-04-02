@@ -17,12 +17,19 @@ export const WrapperCardShopList = styled.div.withConfig({
     ${({ hasHistory }) => (hasHistory ? 'var(--success)' : 'var(--purple-500)')};
 
   background-color: var(--bg-tertiary);
+  cursor: pointer;
+  transition: background-color var(--transition-normal);
+
+  &:active {
+    background-color: var(--bg-light);
+  }
 
   h2 {
     color: var(--text-primary);
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-medium);
     flex: 1;
+    word-break: break-word;
   }
 `
 

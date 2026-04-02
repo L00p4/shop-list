@@ -24,3 +24,9 @@ export const FormActions = styled.div`
     flex: 1;
   }
 `
+
+export const FormHint = styled.p`
+  color: var(--text-tertiary);
+  font-size: var(--font-size-xs);
+  margin-top: var(--space-2);
+`

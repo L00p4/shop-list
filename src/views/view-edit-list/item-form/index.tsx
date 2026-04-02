@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import Button from '../../../ui/button'
 import Input from '../../../ui/input'
 import { WrapperItemForm, FormActions, FormTitle } from './item-form.styles'
@@ -20,6 +20,7 @@ const ItemForm = ({
 }: ItemFormProps) => {
   const [name, setName] = useState(initialName)
   const [error, setError] = useState('')
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -34,6 +35,7 @@ const ItemForm = ({
     onSubmit(trimmedName)
     setName('')
     setError('')
+    setTimeout(() => inputRef.current?.focus(), 0)
   }
 
   const handleCancel = () => {
@@ -53,6 +55,7 @@ const ItemForm = ({
 
       <form onSubmit={handleSubmit}>
         <Input
+          ref={inputRef}
           label="Nome do item"
           value={name}
           onChange={handleNameChange}

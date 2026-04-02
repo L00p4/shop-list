@@ -11,9 +11,7 @@ import ItemForm from '../view-edit-list/item-form'
 import {
   WrapperViewShopping,
   Header,
-  Tabs,
-  Tab,
-  TabContent
+  SectionTitle
 } from './view-shopping.styles'
 
 type ViewShoppingProps = {
@@ -37,8 +35,6 @@ type ViewShoppingProps = {
   onBack: () => void
 }
 
-type ActiveTab = 'list' | 'cart'
-
 const ViewShopping = ({
   listName,
   items,
@@ -51,7 +47,6 @@ const ViewShopping = ({
   onFinish,
   onBack
 }: ViewShoppingProps) => {
-  const [activeTab, setActiveTab] = useState<ActiveTab>('list')
   const [selectedItem, setSelectedItem] = useState<Item | null>(null)
   const [isAddItemModalOpen, setIsAddItemModalOpen] = useState(false)
 
@@ -93,7 +88,6 @@ const ViewShopping = ({
 
   const handleAddNewItem = (name: string) => {
     onAddNewItem(name)
-    setIsAddItemModalOpen(false)
   }
 
   return (
@@ -108,41 +102,22 @@ const ViewShopping = ({
         </Button>
       </Header>
 
-      <Tabs>
-        <Tab
-          $active={activeTab === 'list'}
-          onClick={() => setActiveTab('list')}
-        >
-          Lista ({pendingCount})
-        </Tab>
-        <Tab
-          $active={activeTab === 'cart'}
-          onClick={() => setActiveTab('cart')}
-        >
-          Carrinho ({cartItems.length})
-        </Tab>
-      </Tabs>
+      <SectionTitle>Lista ({pendingCount})</SectionTitle>
+      <TabList
+        items={items}
+        cartItemIds={cartItemIds}
+        onAddToCart={handleAddToCart}
+      />
 
-      <TabContent>
-        {activeTab === 'list' && (
-          <TabList
-            items={items}
-            cartItemIds={cartItemIds}
-            onAddToCart={handleAddToCart}
-          />
-        )}
-
-        {activeTab === 'cart' && (
-          <TabCart
-            items={cartItems}
-            total={cartTotal}
-            pendingCount={pendingCount}
-            onRemoveItem={onRemoveFromCart}
-            onUpdateItem={onUpdateCartItem}
-            onFinish={onFinish}
-          />
-        )}
-      </TabContent>
+      <SectionTitle>Carrinho ({cartItems.length})</SectionTitle>
+      <TabCart
+        items={cartItems}
+        total={cartTotal}
+        pendingCount={pendingCount}
+        onRemoveItem={onRemoveFromCart}
+        onUpdateItem={onUpdateCartItem}
+        onFinish={onFinish}
+      />
 
       <Modal isOpen={!!selectedItem} onClose={() => setSelectedItem(null)}>
         {selectedItem && (

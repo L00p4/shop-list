@@ -15,12 +15,16 @@ export const Header = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--space-3);
   margin-bottom: var(--space-6);
 
   h1 {
-    font-size: var(--font-size-2xl);
+    font-size: var(--font-size-xl);
     font-weight: var(--font-weight-semibold);
     color: var(--text-primary);
+    flex: 1;
+    text-align: center;
+    word-break: break-word;
   }
 `
 
