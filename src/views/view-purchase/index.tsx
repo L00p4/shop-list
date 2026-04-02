@@ -1,5 +1,6 @@
 import { ArrowLeft } from 'lucide-react'
 import Button from '../../ui/button'
+import { formatPrice } from '../../utils/format'
 import {
   WrapperViewPurchase,
   Header,
@@ -31,8 +32,6 @@ type ViewPurchaseProps = {
   purchaseItems: PurchaseItem[]
   onBack: () => void
 }
-
-const formatPrice = (value: number) => `R$ ${value.toFixed(2)}`
 
 const formatDate = (dateString: string) => {
   const date = new Date(dateString)

@@ -44,6 +44,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
+      <head>
+        <link rel="icon" href="/shop-list/favicon.svg" type="image/svg+xml" />
+      </head>
       <body className={inter.className}>
         <StyledComponentsRegistry>
           <Providers>{children}</Providers>

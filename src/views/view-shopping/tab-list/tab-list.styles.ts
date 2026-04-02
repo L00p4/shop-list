@@ -14,6 +14,11 @@ export const PendingItem = styled.div`
   background-color: var(--bg-tertiary);
   border-radius: var(--radius-md);
   border-left: 4px solid var(--purple-500);
+  cursor: pointer;
+
+  &:active {
+    background-color: var(--bg-light);
+  }
 `
 
 export const PendingItemName = styled.span`

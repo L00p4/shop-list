@@ -15,6 +15,12 @@ const meta: Meta<typeof ViewEditList> = {
     onRemoveItem: (id: string) => console.log('Remover item:', id),
     onEditItem: (id: string, name: string) =>
       console.log('Editar item:', id, name),
+    onCreateCategory: (name: string) => {
+      console.log('Criar categoria:', name)
+      return { id: `cat-${Date.now()}`, name, color: '#8b5cf6' }
+    },
+    categories: [],
+    canCreateCategory: true,
     onBack: () => console.log('Voltar')
   }
 }

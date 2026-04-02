@@ -1,6 +1,7 @@
 import { JSX } from 'react'
 import { Pencil, Scale, AlertTriangle } from 'lucide-react'
 import Button from '../button'
+import { formatPrice } from '../../utils/format'
 import {
   ButtonContainerItem,
   LeftContentContainerItem,
@@ -41,7 +42,7 @@ const renderProductInfo = (
   if (isCartUnit && unitPrice && quantity) {
     return (
       <p>
-        {quantity}x R$ {unitPrice.toFixed(2)} cada
+        {quantity}x {formatPrice(unitPrice)} cada
       </p>
     )
   }
@@ -49,7 +50,7 @@ const renderProductInfo = (
   if (isCartWeightWeighed && unitPrice && weight) {
     return (
       <p>
-        {weight}kg x R$ {unitPrice.toFixed(2)} por kg
+        {weight}kg x {formatPrice(unitPrice)} por kg
       </p>
     )
   }
@@ -76,7 +77,7 @@ const renderTotalValue = (
     status === 'cart' && measure === 'kg' && weight && weight > 0
 
   if ((isCartUnit || isCartWeightWeighed) && total) {
-    return <p>R$ {total.toFixed(2)}</p>
+    return <p>{formatPrice(total)}</p>
   }
 
   return null

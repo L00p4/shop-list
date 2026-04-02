@@ -4,6 +4,7 @@ import Button from '../../../ui/button'
 import Input from '../../../ui/input'
 import Modal from '../../../ui/modal'
 import { type CartItem } from '../../../context/shopping-lists-context'
+import { formatPrice } from '../../../utils/format'
 import {
   WrapperTabCart,
   CartItemRow,
@@ -30,8 +31,6 @@ type TabCartProps = {
   onUpdateItem: (cartItemId: string, updates: Partial<CartItem>) => void
   onFinish: () => void
 }
-
-const formatPrice = (value: number) => `R$ ${value.toFixed(2)}`
 
 const TabCart = ({
   items,

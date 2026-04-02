@@ -77,11 +77,17 @@ export const MenuButton = styled.button`
   }
 `
 
+export const MenuOverlay = styled.div`
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-dropdown);
+`
+
 export const MenuDropdown = styled.div`
   position: absolute;
   top: 100%;
   right: 0;
-  z-index: var(--z-dropdown);
+  z-index: calc(var(--z-dropdown) + 1);
   background-color: var(--bg-secondary);
   border: 1px solid var(--border-default);
   border-radius: var(--radius-md);

@@ -16,12 +16,15 @@ type AppView =
 export default function Home() {
   const {
     lists,
+    categories,
     addList,
     addItem,
     removeItem,
     editItem,
     editList,
     removeList,
+    addCategory,
+    canAddCategory,
     importList,
     cart,
     startShopping,
@@ -57,9 +60,14 @@ export default function Home() {
       <ViewEditList
         listName={selectedList.name}
         items={selectedList.items}
-        onAddItem={(name) => addItem(view.listId, name)}
+        categories={categories}
+        canCreateCategory={canAddCategory()}
+        onAddItem={(name, categoryId) => addItem(view.listId, name, categoryId)}
         onRemoveItem={(itemId) => removeItem(view.listId, itemId)}
-        onEditItem={(itemId, newName) => editItem(view.listId, itemId, newName)}
+        onEditItem={(itemId, newName, categoryId) =>
+          editItem(view.listId, itemId, newName, categoryId)
+        }
+        onCreateCategory={addCategory}
         onBack={() => {
           if (view.returnTo === 'shopping') {
             setView({ screen: 'shopping', listId: view.listId })

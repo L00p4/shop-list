@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState } from 'react'
 import {
   MoreVertical,
   Pencil,
@@ -16,10 +16,12 @@ import {
   ButtonsContainer,
   MenuWrapper,
   MenuButton,
+  MenuOverlay,
   MenuDropdown,
   MenuItem
 } from './card-shop-list.styles'
 import { type ShoppingList } from '../../mocks'
+import { formatPrice } from '../../utils/format'
 
 export { default as CardShopListSkeleton } from './card-shop-list.skeleton'
 
@@ -62,56 +64,45 @@ const CardShopList = ({
   const createdDate = formatDate(list.createdAt)
   const itemsCount = list.items.length
   const [menuOpen, setMenuOpen] = useState(false)
-  const menuRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    if (!menuOpen) return
-
-    const handleClickOutside = (e: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
-        setMenuOpen(false)
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [menuOpen])
 
   return (
     <WrapperCardShopList hasHistory={hasHistory} onClick={onEdit}>
       <CardHeader>
         <h2>{list.name}</h2>
-        <MenuWrapper ref={menuRef} onClick={(e) => e.stopPropagation()}>
+        <MenuWrapper onClick={(e) => e.stopPropagation()}>
           <MenuButton onClick={() => setMenuOpen(!menuOpen)}>
             <MoreVertical size={18} />
           </MenuButton>
           {menuOpen && (
-            <MenuDropdown>
-              <MenuItem
-                onClick={() => {
-                  onEditName?.()
-                  setMenuOpen(false)
-                }}
-              >
-                <Pencil size={14} /> Renomear
-              </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  onShare?.()
-                  setMenuOpen(false)
-                }}
-              >
-                <Share2 size={14} /> Compartilhar
-              </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  onDelete?.()
-                  setMenuOpen(false)
-                }}
-              >
-                <Trash2 size={14} /> Excluir
-              </MenuItem>
-            </MenuDropdown>
+            <>
+              <MenuOverlay onClick={() => setMenuOpen(false)} />
+              <MenuDropdown>
+                <MenuItem
+                  onClick={() => {
+                    onEditName?.()
+                    setMenuOpen(false)
+                  }}
+                >
+                  <Pencil size={14} /> Renomear
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    onShare?.()
+                    setMenuOpen(false)
+                  }}
+                >
+                  <Share2 size={14} /> Compartilhar
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    onDelete?.()
+                    setMenuOpen(false)
+                  }}
+                >
+                  <Trash2 size={14} /> Excluir
+                </MenuItem>
+              </MenuDropdown>
+            </>
           )}
         </MenuWrapper>
       </CardHeader>
@@ -122,7 +113,7 @@ const CardShopList = ({
           <p>
             Última compra {formatDate(list.lastPurchaseDate)}
             {list.lastPurchaseTotal &&
-              ` • R$ ${list.lastPurchaseTotal.toFixed(2)}`}
+              ` • ${formatPrice(list.lastPurchaseTotal)}`}
           </p>
         )}
         <p>Criada {createdDate}</p>

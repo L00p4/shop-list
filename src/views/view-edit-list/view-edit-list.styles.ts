@@ -34,26 +34,76 @@ export const ItemsContainer = styled.div`
   gap: var(--space-2);
 `
 
-export const ItemRow = styled.div`
+export const ItemRow = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['borderColor'].includes(prop)
+})<{ borderColor?: string }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: var(--space-3) var(--space-4);
   background-color: var(--bg-tertiary);
   border-radius: var(--radius-md);
-  border-left: 4px solid var(--purple-500);
+  border-left: 4px solid
+    ${({ borderColor }) => borderColor || 'var(--purple-500)'};
+  cursor: pointer;
+
+  &:active {
+    background-color: var(--bg-light);
+  }
 `
 
 export const ItemName = styled.span`
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
   color: var(--text-primary);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-medium);
+`
+
+export const ItemCategoryDot = styled.span.withConfig({
+  shouldForwardProp: (prop) => !['color'].includes(prop)
+})<{ color: string }>`
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background-color: ${({ color }) => color};
+  flex-shrink: 0;
 `
 
 export const ItemActions = styled.div`
   display: flex;
   gap: var(--space-2);
   flex-shrink: 0;
+`
+
+export const CategoryGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+`
+
+export const CategoryGroupTitle = styled.h3.withConfig({
+  shouldForwardProp: (prop) => !['color'].includes(prop)
+})<{ color: string }>`
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding-bottom: var(--space-1);
+
+  &::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: var(--radius-full);
+    background-color: ${({ color }) => color};
+  }
 `
 
 export const EmptyMessage = styled.p`

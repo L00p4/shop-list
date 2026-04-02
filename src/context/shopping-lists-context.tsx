@@ -9,6 +9,11 @@ import {
 } from 'react'
 import { type ShoppingList } from '../mocks'
 import { decodeList, mergeList, createListFromShared } from '../utils/share'
+import {
+  type Category,
+  createCategory,
+  canCreateCategory
+} from '../utils/category'
 
 export type CartItem = {
   id: string
@@ -28,12 +33,20 @@ export type Cart = {
 
 type ShoppingListsContextType = {
   lists: ShoppingList[]
+  categories: Category[]
   addList: (name: string) => void
   removeList: (id: string) => void
   editList: (id: string, name: string) => void
-  addItem: (listId: string, itemName: string) => void
+  addItem: (listId: string, itemName: string, categoryId?: string) => void
   removeItem: (listId: string, itemId: string) => void
-  editItem: (listId: string, itemId: string, newName: string) => void
+  editItem: (
+    listId: string,
+    itemId: string,
+    newName: string,
+    categoryId?: string
+  ) => void
+  addCategory: (name: string) => Category | null
+  canAddCategory: () => boolean
   importList: (encoded: string) => { success: boolean; message: string }
   cart: Cart | null
   startShopping: (listId: string) => void
@@ -47,6 +60,7 @@ type ShoppingListsContextType = {
 
 const STORAGE_KEY = 'shop-list:lists'
 const CART_STORAGE_KEY = 'shop-list:cart'
+const CATEGORIES_STORAGE_KEY = 'shop-list:categories'
 
 const ShoppingListsContext = createContext<ShoppingListsContextType | null>(
   null
@@ -69,11 +83,13 @@ export const ShoppingListsProvider = ({
 }) => {
   const [lists, setLists] = useState<ShoppingList[]>([])
   const [cart, setCart] = useState<Cart | null>(null)
+  const [categories, setCategories] = useState<Category[]>([])
   const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
     setLists(loadFromStorage<ShoppingList[]>(STORAGE_KEY, []))
     setCart(loadFromStorage<Cart | null>(CART_STORAGE_KEY, null))
+    setCategories(loadFromStorage<Category[]>(CATEGORIES_STORAGE_KEY, []))
     setLoaded(true)
   }, [])
 
@@ -90,6 +106,11 @@ export const ShoppingListsProvider = ({
       localStorage.removeItem(CART_STORAGE_KEY)
     }
   }, [cart, loaded])
+
+  useEffect(() => {
+    if (!loaded) return
+    saveToStorage(CATEGORIES_STORAGE_KEY, categories)
+  }, [categories, loaded])
 
   // === List operations ===
 
@@ -118,22 +139,33 @@ export const ShoppingListsProvider = ({
     )
   }, [])
 
-  const addItem = useCallback((listId: string, itemName: string) => {
-    setLists((prev) =>
-      prev.map((list) =>
-        list.id === listId
-          ? {
-              ...list,
-              items: [
-                ...list.items,
-                { id: `item-${Date.now()}`, name: itemName }
-              ],
-              updatedAt: new Date().toISOString()
-            }
-          : list
+  const addItem = useCallback(
+    (listId: string, itemName: string, categoryId?: string) => {
+      const cat = categoryId
+        ? categories.find((c) => c.id === categoryId)
+        : undefined
+      setLists((prev) =>
+        prev.map((list) =>
+          list.id === listId
+            ? {
+                ...list,
+                items: [
+                  ...list.items,
+                  {
+                    id: `item-${Date.now()}`,
+                    name: itemName,
+                    category: cat?.name,
+                    categoryColor: cat?.color
+                  }
+                ],
+                updatedAt: new Date().toISOString()
+              }
+            : list
+        )
       )
-    )
-  }, [])
+    },
+    [categories]
+  )
 
   const removeItem = useCallback((listId: string, itemId: string) => {
     setLists((prev) =>
@@ -150,14 +182,24 @@ export const ShoppingListsProvider = ({
   }, [])
 
   const editItem = useCallback(
-    (listId: string, itemId: string, newName: string) => {
+    (listId: string, itemId: string, newName: string, categoryId?: string) => {
+      const cat = categoryId
+        ? categories.find((c) => c.id === categoryId)
+        : undefined
       setLists((prev) =>
         prev.map((list) =>
           list.id === listId
             ? {
                 ...list,
                 items: list.items.map((item) =>
-                  item.id === itemId ? { ...item, name: newName } : item
+                  item.id === itemId
+                    ? {
+                        ...item,
+                        name: newName,
+                        category: cat?.name ?? item.category,
+                        categoryColor: cat?.color ?? item.categoryColor
+                      }
+                    : item
                 ),
                 updatedAt: new Date().toISOString()
               }
@@ -165,8 +207,22 @@ export const ShoppingListsProvider = ({
         )
       )
     },
-    []
+    [categories]
   )
+
+  const addCategory = useCallback(
+    (name: string): Category | null => {
+      if (!canCreateCategory(categories)) return null
+      const newCat = createCategory(name, categories)
+      setCategories((prev) => [...prev, newCat])
+      return newCat
+    },
+    [categories]
+  )
+
+  const canAddCategoryFn = useCallback(() => {
+    return canCreateCategory(categories)
+  }, [categories])
 
   // === Import/Share ===
 
@@ -297,12 +353,15 @@ export const ShoppingListsProvider = ({
     <ShoppingListsContext.Provider
       value={{
         lists,
+        categories,
         addList,
         removeList,
         editList,
         addItem,
         removeItem,
         editItem,
+        addCategory,
+        canAddCategory: canAddCategoryFn,
         importList,
         cart,
         startShopping,

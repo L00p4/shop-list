@@ -27,7 +27,7 @@ const TabList = ({ items, cartItemIds, onAddToCart }: TabListProps) => {
   return (
     <WrapperTabList>
       {pendingItems.map((item) => (
-        <PendingItem key={item.id}>
+        <PendingItem key={item.id} onClick={() => onAddToCart(item)}>
           <PendingItemName>{item.name}</PendingItemName>
           <Button
             variant="primary"

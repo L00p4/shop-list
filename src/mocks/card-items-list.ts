@@ -151,6 +151,7 @@ export type Item = {
   id: string
   name: string
   category?: string
+  categoryColor?: string
   estimatedPrice?: number
   notes?: string
 }
