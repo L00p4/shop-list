@@ -13,8 +13,10 @@ export const WrapperViewMinhasListas = styled.div`
 
 export const Header = styled.header`
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  gap: var(--space-3);
   margin-bottom: var(--space-6);
 
   h1 {
@@ -22,6 +24,12 @@ export const Header = styled.header`
     font-weight: var(--font-weight-semibold);
     color: var(--text-primary);
   }
+`
+
+export const HeaderActions = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
 `
 
 export const ListsContainer = styled.div`

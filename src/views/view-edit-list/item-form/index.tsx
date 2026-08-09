@@ -1,63 +1,90 @@
 import { useState, useRef } from 'react'
-import { Plus } from 'lucide-react'
+import { Plus, X, Check } from 'lucide-react'
 import Button from '../../../ui/button'
 import Input from '../../../ui/input'
 import { type Category } from '../../../utils/category'
 import {
   WrapperItemForm,
+  CloseButton,
   FormActions,
   FormTitle,
   CategorySelect,
   CategoryOption,
   CategoryDot,
-  NewCategoryRow
+  NewCategoryRow,
+  ShakeField
 } from './item-form.styles'
 
 type ItemFormProps = {
   onSubmit: (name: string, categoryId?: string) => void
-  onCancel: () => void
+  onClose: () => void
   onCreateCategory?: (name: string) => Category | null
   categories?: Category[]
   canCreateCategory?: boolean
+  existingNames?: string[]
   initialName?: string
   initialCategoryId?: string
   title?: string
   submitLabel?: string
+  showAddAnother?: boolean
 }
 
 const ItemForm = ({
   onSubmit,
-  onCancel,
+  onClose,
   onCreateCategory,
   categories = [],
   canCreateCategory = true,
+  existingNames = [],
   initialName = '',
   initialCategoryId = '',
   title = 'Novo Item',
-  submitLabel = 'Adicionar'
+  submitLabel = 'Adicionar e fechar',
+  showAddAnother = true
 }: ItemFormProps) => {
   const [name, setName] = useState(initialName)
   const [categoryId, setCategoryId] = useState(initialCategoryId)
   const [newCategoryName, setNewCategoryName] = useState('')
   const [showNewCategory, setShowNewCategory] = useState(false)
   const [error, setError] = useState('')
+  const [shake, setShake] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+  const isDuplicate = (value: string) =>
+    existingNames.some((n) => n.trim().toLowerCase() === value.toLowerCase())
 
+  const submit = (keepOpen: boolean) => {
     const trimmedName = name.trim()
 
     if (!trimmedName) {
       setError('Nome do item é obrigatório')
+      setShake(true)
+      return
+    }
+
+    if (isDuplicate(trimmedName)) {
+      setError(`“${trimmedName}” já está na lista`)
+      setShake(true)
+      inputRef.current?.focus()
       return
     }
 
     onSubmit(trimmedName, categoryId || undefined)
-    setName('')
-    setCategoryId('')
     setError('')
+
+    if (!keepOpen) {
+      onClose()
+      return
+    }
+
+    // Mantém a categoria selecionada para facilitar o cadastro em lote
+    setName('')
     setTimeout(() => inputRef.current?.focus(), 0)
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    submit(false)
   }
 
   const handleCancel = () => {
@@ -66,7 +93,7 @@ const ItemForm = ({
     setError('')
     setShowNewCategory(false)
     setNewCategoryName('')
-    onCancel()
+    onClose()
   }
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -88,19 +115,25 @@ const ItemForm = ({
 
   return (
     <WrapperItemForm>
+      <CloseButton type="button" onClick={handleCancel} aria-label="Fechar">
+        <X size={20} />
+      </CloseButton>
+
       <FormTitle>{title}</FormTitle>
 
       <form onSubmit={handleSubmit}>
-        <Input
-          ref={inputRef}
-          label="Nome do item"
-          value={name}
-          onChange={handleNameChange}
-          error={error}
-          placeholder="Ex: Arroz 5kg"
-          fullWidth
-          autoFocus
-        />
+        <ShakeField $shake={shake} onAnimationEnd={() => setShake(false)}>
+          <Input
+            ref={inputRef}
+            label="Nome do item"
+            value={name}
+            onChange={handleNameChange}
+            error={error}
+            placeholder="Ex: Arroz 5kg"
+            fullWidth
+            autoFocus
+          />
+        </ShakeField>
 
         {categories.length > 0 && (
           <CategorySelect
@@ -169,11 +202,18 @@ const ItemForm = ({
         )}
 
         <FormActions>
-          <Button type="button" variant="secondary" onClick={handleCancel}>
-            Cancelar
-          </Button>
+          {showAddAnother && (
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={() => submit(true)}
+              disabled={!name.trim()}
+            >
+              <Plus size={16} /> Adicionar e continuar
+            </Button>
+          )}
           <Button type="submit" variant="primary" disabled={!name.trim()}>
-            {submitLabel}
+            <Check size={16} /> {submitLabel}
           </Button>
         </FormActions>
       </form>

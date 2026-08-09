@@ -23,9 +23,32 @@ export const Header = styled.header`
     font-weight: var(--font-weight-semibold);
     color: var(--text-primary);
     flex: 1;
+    min-width: 0;
     text-align: center;
     word-break: break-word;
   }
+`
+
+export const TotalBar = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4);
+  background-color: var(--success);
+  border-radius: var(--radius-md);
+  margin-top: var(--space-4);
+`
+
+export const TotalLabel = styled.span`
+  color: var(--text-primary);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+`
+
+export const TotalValue = styled.span`
+  color: var(--text-primary);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
 `
 
 export const SectionTitle = styled.h2`

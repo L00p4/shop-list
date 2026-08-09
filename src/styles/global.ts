@@ -247,6 +247,19 @@ const GlobalStyles = createGlobalStyle`
     animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 
+  /* Animação de shake para feedback sutil de erro (ex: item duplicado) */
+  @keyframes shake {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    20%, 60% {
+      transform: translateX(-6px);
+    }
+    40%, 80% {
+      transform: translateX(6px);
+    }
+  }
+
   /* Classes utilitárias para truncate */
   .truncate {
     overflow: hidden;

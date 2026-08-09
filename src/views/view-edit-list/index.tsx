@@ -2,9 +2,11 @@ import { useState } from 'react'
 import { ArrowLeft, X } from 'lucide-react'
 import Button from '../../ui/button'
 import Modal from '../../ui/modal'
+import SearchBar from '../../ui/search-bar'
 import ItemForm from './item-form'
 import { type Item } from '../../mocks'
 import { type Category } from '../../utils/category'
+import { normalizeText } from '../../utils/format'
 import {
   WrapperViewEditList,
   Header,
@@ -52,6 +54,7 @@ const ViewEditList = ({
   onBack
 }: ViewEditListProps) => {
   const [modal, setModal] = useState<ModalState>({ type: 'closed' })
+  const [query, setQuery] = useState('')
 
   const closeModal = () => setModal({ type: 'closed' })
 
@@ -66,11 +69,16 @@ const ViewEditList = ({
     closeModal()
   }
 
-  const uncategorizedItems = items.filter((item) => !item.category)
+  const normalizedQuery = normalizeText(query)
+  const visibleItems = normalizedQuery
+    ? items.filter((item) => normalizeText(item.name).includes(normalizedQuery))
+    : items
+
+  const uncategorizedItems = visibleItems.filter((item) => !item.category)
   const categorizedGroups = categories
     .map((cat) => ({
       category: cat,
-      items: items.filter((item) => item.category === cat.name)
+      items: visibleItems.filter((item) => item.category === cat.name)
     }))
     .filter((group) => group.items.length > 0)
 
@@ -91,10 +99,24 @@ const ViewEditList = ({
         </Button>
       </Header>
 
+      {items.length > 0 && (
+        <SearchBar
+          value={query}
+          onChange={setQuery}
+          placeholder="Buscar na lista..."
+        />
+      )}
+
       <ItemsContainer>
         {items.length === 0 && (
           <EmptyMessage>
             Nenhum item na lista. Adicione itens clicando em &quot;+ Item&quot;.
+          </EmptyMessage>
+        )}
+
+        {items.length > 0 && visibleItems.length === 0 && (
+          <EmptyMessage>
+            Nenhum item encontrado para &ldquo;{query.trim()}&rdquo;.
           </EmptyMessage>
         )}
 
@@ -163,26 +185,31 @@ const ViewEditList = ({
       <Modal isOpen={modal.type === 'add'} onClose={closeModal}>
         <ItemForm
           onSubmit={handleAddItem}
-          onCancel={closeModal}
+          onClose={closeModal}
           categories={categories}
           canCreateCategory={canCreateCategory}
           onCreateCategory={onCreateCategory}
+          existingNames={items.map((item) => item.name)}
         />
       </Modal>
 
       <Modal isOpen={modal.type === 'edit'} onClose={closeModal}>
         <ItemForm
           onSubmit={handleEditItem}
-          onCancel={closeModal}
+          onClose={closeModal}
           categories={categories}
           canCreateCategory={canCreateCategory}
           onCreateCategory={onCreateCategory}
+          existingNames={items
+            .filter((item) => modal.type !== 'edit' || item.id !== modal.itemId)
+            .map((item) => item.name)}
           initialName={modal.type === 'edit' ? modal.currentName : ''}
           initialCategoryId={
             modal.type === 'edit' ? modal.currentCategoryId : ''
           }
           title="Editar Item"
           submitLabel="Salvar"
+          showAddAnother={false}
         />
       </Modal>
     </WrapperViewEditList>

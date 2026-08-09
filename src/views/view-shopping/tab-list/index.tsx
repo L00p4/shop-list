@@ -9,14 +9,18 @@ import {
 
 type TabListProps = {
   items: Item[]
-  cartItemIds: string[]
+  allItemsCount: number
+  query?: string
   onAddToCart: (item: Item) => void
 }
 
-const TabList = ({ items, cartItemIds, onAddToCart }: TabListProps) => {
-  const pendingItems = items.filter((item) => !cartItemIds.includes(item.id))
-
-  if (pendingItems.length === 0) {
+const TabList = ({
+  items,
+  allItemsCount,
+  query = '',
+  onAddToCart
+}: TabListProps) => {
+  if (allItemsCount === 0) {
     return (
       <WrapperTabList>
         <EmptyMessage>Todos os itens já estão no carrinho!</EmptyMessage>
@@ -24,16 +28,22 @@ const TabList = ({ items, cartItemIds, onAddToCart }: TabListProps) => {
     )
   }
 
+  if (items.length === 0) {
+    return (
+      <WrapperTabList>
+        <EmptyMessage>
+          Nenhum item pendente encontrado para &ldquo;{query.trim()}&rdquo;.
+        </EmptyMessage>
+      </WrapperTabList>
+    )
+  }
+
   return (
     <WrapperTabList>
-      {pendingItems.map((item) => (
+      {items.map((item) => (
         <PendingItem key={item.id} onClick={() => onAddToCart(item)}>
           <PendingItemName>{item.name}</PendingItemName>
-          <Button
-            variant="primary"
-            size="small"
-            onClick={() => onAddToCart(item)}
-          >
+          <Button variant="primary" size="small">
             +
           </Button>
         </PendingItem>

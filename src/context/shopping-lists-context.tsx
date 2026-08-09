@@ -76,6 +76,11 @@ const saveToStorage = (key: string, data: unknown) => {
   localStorage.setItem(key, JSON.stringify(data))
 }
 
+// Sufixo aleatório evita ids iguais em adições no mesmo milissegundo
+// (o que duplicaria keys do React e faria o remover apagar dois itens)
+const createId = (prefix: string) =>
+  `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`
+
 export const ShoppingListsProvider = ({
   children
 }: {
@@ -116,7 +121,7 @@ export const ShoppingListsProvider = ({
 
   const addList = useCallback((name: string) => {
     const newList: ShoppingList = {
-      id: `list-${Date.now()}`,
+      id: createId('list'),
       name,
       items: [],
       createdAt: new Date().toISOString(),
@@ -152,7 +157,7 @@ export const ShoppingListsProvider = ({
                 items: [
                   ...list.items,
                   {
-                    id: `item-${Date.now()}`,
+                    id: createId('item'),
                     name: itemName,
                     category: cat?.name,
                     categoryColor: cat?.color
@@ -277,7 +282,7 @@ export const ShoppingListsProvider = ({
   const addToCart = useCallback((item: Omit<CartItem, 'id'>) => {
     setCart((prev) => {
       if (!prev) return prev
-      const newItem: CartItem = { ...item, id: `cart-${Date.now()}` }
+      const newItem: CartItem = { ...item, id: createId('cart') }
       return { ...prev, items: [...prev.items, newItem] }
     })
   }, [])

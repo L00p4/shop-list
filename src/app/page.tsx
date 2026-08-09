@@ -93,10 +93,15 @@ export default function Home() {
         items={selectedList.items}
         cartItems={cart?.items ?? []}
         cartTotal={getCartTotal()}
+        categories={categories}
+        canCreateCategory={canAddCategory()}
         onAddToCart={(data) => addToCart(data)}
         onRemoveFromCart={removeFromCart}
         onUpdateCartItem={updateCartItem}
-        onAddNewItem={(name) => addItem(view.listId, name)}
+        onAddNewItem={(name, categoryId) =>
+          addItem(view.listId, name, categoryId)
+        }
+        onCreateCategory={addCategory}
         onFinish={() => {
           finishShopping()
           setView({ screen: 'lists' })

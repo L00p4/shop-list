@@ -18,17 +18,32 @@ type AddToCartFormProps = {
     unitPrice: number
   }) => void
   onCancel: () => void
+  initialMeasure?: 'unit' | 'kg'
+  initialQuantity?: number
+  initialUnitPrice?: number
+  initialWeight?: number
+  submitLabel?: string
 }
+
+const toInputValue = (value?: number) =>
+  value === undefined || value === 0 ? '' : String(value)
 
 const AddToCartForm = ({
   itemName,
   onSubmit,
-  onCancel
+  onCancel,
+  initialMeasure = 'unit',
+  initialQuantity,
+  initialUnitPrice,
+  initialWeight,
+  submitLabel = 'Adicionar'
 }: AddToCartFormProps) => {
-  const [measure, setMeasure] = useState<'unit' | 'kg'>('unit')
-  const [quantity, setQuantity] = useState('1')
-  const [weight, setWeight] = useState('')
-  const [unitPrice, setUnitPrice] = useState('')
+  const [measure, setMeasure] = useState<'unit' | 'kg'>(initialMeasure)
+  const [quantity, setQuantity] = useState(
+    initialQuantity === undefined ? '1' : String(initialQuantity)
+  )
+  const [weight, setWeight] = useState(toInputValue(initialWeight))
+  const [unitPrice, setUnitPrice] = useState(toInputValue(initialUnitPrice))
   const [error, setError] = useState('')
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -125,7 +140,7 @@ const AddToCartForm = ({
             Cancelar
           </Button>
           <Button type="submit" variant="primary">
-            Adicionar
+            {submitLabel}
           </Button>
         </FormActions>
       </form>

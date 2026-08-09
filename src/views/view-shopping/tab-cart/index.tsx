@@ -8,14 +8,12 @@ import { formatPrice } from '../../../utils/format'
 import {
   WrapperTabCart,
   CartItemRow,
+  CartItemActions,
   CartItemDetails,
   CartItemName,
   CartItemInfo,
   CartItemPrice,
   CartItemPending,
-  TotalBar,
-  TotalLabel,
-  TotalValue,
   EmptyMessage,
   ConfirmContent,
   ConfirmTitle,
@@ -25,19 +23,23 @@ import {
 
 type TabCartProps = {
   items: CartItem[]
-  total: number
+  allItemsCount: number
   pendingCount: number
+  query?: string
   onRemoveItem: (cartItemId: string) => void
   onUpdateItem: (cartItemId: string, updates: Partial<CartItem>) => void
+  onEditItem: (item: CartItem) => void
   onFinish: () => void
 }
 
 const TabCart = ({
   items,
-  total,
+  allItemsCount,
   pendingCount,
+  query = '',
   onRemoveItem,
   onUpdateItem,
+  onEditItem,
   onFinish
 }: TabCartProps) => {
   const [showConfirm, setShowConfirm] = useState(false)
@@ -73,11 +75,21 @@ const TabCart = ({
   const needsWeighing = (item: CartItem) =>
     item.measure === 'kg' && (!item.weight || item.weight === 0)
 
+  if (allItemsCount === 0) {
+    return (
+      <WrapperTabCart>
+        <EmptyMessage>
+          Carrinho vazio. Adicione itens pela lista acima.
+        </EmptyMessage>
+      </WrapperTabCart>
+    )
+  }
+
   if (items.length === 0) {
     return (
       <WrapperTabCart>
         <EmptyMessage>
-          Carrinho vazio. Adicione itens pela aba Lista.
+          Nenhum item do carrinho encontrado para &ldquo;{query.trim()}&rdquo;.
         </EmptyMessage>
       </WrapperTabCart>
     )
@@ -86,7 +98,7 @@ const TabCart = ({
   return (
     <WrapperTabCart>
       {items.map((item) => (
-        <CartItemRow key={item.id}>
+        <CartItemRow key={item.id} onClick={() => onEditItem(item)}>
           <CartItemDetails>
             <CartItemName>{item.name}</CartItemName>
             {needsWeighing(item) ? (
@@ -102,41 +114,39 @@ const TabCart = ({
             )}
           </CartItemDetails>
 
-          {needsWeighing(item) ? (
-            <Button
-              variant="warning"
-              size="small"
-              onClick={() => {
-                setWeighingItem(item)
-                setWeightValue('')
-              }}
-            >
-              <Scale size={14} /> Pesar
-            </Button>
-          ) : (
+          {!needsWeighing(item) && (
             <CartItemPrice>{formatPrice(item.total)}</CartItemPrice>
           )}
 
-          <Button
-            variant="secondary"
-            size="compact"
-            onClick={() => onRemoveItem(item.id)}
-          >
-            <X size={14} />
-          </Button>
+          <CartItemActions onClick={(e) => e.stopPropagation()}>
+            {needsWeighing(item) && (
+              <Button
+                variant="warning"
+                size="small"
+                onClick={() => {
+                  setWeighingItem(item)
+                  setWeightValue('')
+                }}
+              >
+                <Scale size={14} /> Pesar
+              </Button>
+            )}
+            <Button
+              variant="secondary"
+              size="compact"
+              onClick={() => onRemoveItem(item.id)}
+            >
+              <X size={14} />
+            </Button>
+          </CartItemActions>
         </CartItemRow>
       ))}
 
-      <TotalBar>
-        <TotalLabel>Total</TotalLabel>
-        <TotalValue>{formatPrice(total)}</TotalValue>
-      </TotalBar>
-
       <Button
-        variant="primary"
+        variant="success"
         size="large"
         onClick={handleFinishClick}
-        disabled={items.length === 0}
+        disabled={allItemsCount === 0}
       >
         <CheckCircle size={16} /> Finalizar Compra
       </Button>
@@ -153,7 +163,7 @@ const TabCart = ({
             <Button variant="secondary" onClick={() => setShowConfirm(false)}>
               Voltar
             </Button>
-            <Button variant="primary" onClick={onFinish}>
+            <Button variant="success" onClick={onFinish}>
               Finalizar
             </Button>
           </ConfirmActions>

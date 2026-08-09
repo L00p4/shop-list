@@ -13,6 +13,18 @@ export const CartItemRow = styled.div`
   padding: var(--space-3) var(--space-4);
   background-color: var(--bg-tertiary);
   border-radius: var(--radius-md);
+  cursor: pointer;
+
+  &:active {
+    background-color: var(--bg-light);
+  }
+`
+
+export const CartItemActions = styled.div`
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
 `
 
 export const CartItemDetails = styled.div`
@@ -46,28 +58,6 @@ export const CartItemPrice = styled.span`
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-semibold);
   white-space: nowrap;
-`
-
-export const TotalBar = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--space-4);
-  background-color: var(--purple-500);
-  border-radius: var(--radius-md);
-  margin-top: var(--space-2);
-`
-
-export const TotalLabel = styled.span`
-  color: var(--text-primary);
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
-`
-
-export const TotalValue = styled.span`
-  color: var(--text-primary);
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
 `
 
 export const EmptyMessage = styled.p`

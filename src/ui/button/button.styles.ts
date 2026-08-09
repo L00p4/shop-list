@@ -67,6 +67,21 @@ const buttonVariants = {
       background: var(--warning-light);
       transform: translateY(1px);
     }
+  `,
+  success: css`
+    background: var(--success);
+    color: var(--text-primary);
+    border: 1px solid var(--success);
+
+    &:hover:not(:disabled) {
+      background: var(--success-light);
+      border-color: var(--success-light);
+    }
+
+    &:active:not(:disabled) {
+      background: var(--success-dark);
+      transform: translateY(1px);
+    }
   `
 }
 
@@ -93,7 +108,9 @@ const buttonSizes = {
   `
 }
 
-export const WrapperButton = styled.button<WrapperButtonProps>`
+export const WrapperButton = styled.button.withConfig({
+  shouldForwardProp: (prop) => !['variant', 'size'].includes(prop)
+})<WrapperButtonProps>`
   /* Reset and base styles */
   border: none;
   outline: none;
@@ -106,6 +123,15 @@ export const WrapperButton = styled.button<WrapperButtonProps>`
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
+
+  /* Impede que o flex do container encolha o botão abaixo do texto,
+     o que quebrava rótulos no meio da palavra ("Última / compra") */
+  white-space: nowrap;
+  flex-shrink: 0;
+
+  svg {
+    flex-shrink: 0;
+  }
 
   /* Transitions */
   transition: all var(--transition-normal);

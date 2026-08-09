@@ -34,11 +34,17 @@ const meta: Meta<typeof ViewShopping> = {
   args: {
     listName: listWithItems.name,
     items: listWithItems.items,
+    categories: [],
+    canCreateCategory: true,
     onAddToCart: (data) => console.log('Adicionar ao carrinho:', data),
     onRemoveFromCart: (id) => console.log('Remover do carrinho:', id),
     onUpdateCartItem: (id, updates) =>
       console.log('Atualizar item:', id, updates),
     onAddNewItem: (name) => console.log('Novo item:', name),
+    onCreateCategory: (name) => {
+      console.log('Nova categoria:', name)
+      return null
+    },
     onFinish: () => console.log('Finalizar compra'),
     onBack: () => console.log('Voltar')
   }

@@ -9,7 +9,8 @@ const meta: Meta<typeof ItemForm> = {
   tags: ['autodocs'],
   args: {
     onSubmit: (name: string) => console.log('Adicionar item:', name),
-    onCancel: () => console.log('Cancelar')
+    onClose: () => console.log('Fechar'),
+    existingNames: ['Queijo', 'Arroz 5kg']
   },
   decorators: [
     (Story) => (

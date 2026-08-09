@@ -56,6 +56,7 @@ export const ContentCardItem = styled.div`
 
 export const ButtonsContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-end;
   gap: var(--space-2);
 `

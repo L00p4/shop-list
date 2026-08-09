@@ -1,6 +1,7 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const WrapperItemForm = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
@@ -18,17 +19,56 @@ export const FormTitle = styled.h2`
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-semibold);
   margin: 0;
+  /* Espaço para o botão de fechar não colidir com títulos longos */
+  padding: 0 var(--space-8);
   text-align: center;
 `
 
-export const FormActions = styled.div`
+export const CloseButton = styled.button`
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+
   display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: var(--space-2);
+  border-radius: var(--radius-full);
+  color: var(--text-tertiary);
+  transition: var(--transition-normal);
+
+  &:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+  }
+`
+
+export const FormActions = styled.div`
+  /* Lado a lado quando há largura; empilha no celular em vez de
+     apertar os botões e quebrar os rótulos no meio da palavra. */
+  display: flex;
+  flex-wrap: wrap;
   gap: var(--space-3);
   margin-top: var(--space-2);
 
   button {
-    flex: 1;
+    flex: 1 1 150px;
   }
+`
+
+export const ShakeField = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['$shake'].includes(prop)
+})<{ $shake: boolean }>`
+  ${({ $shake }) =>
+    $shake &&
+    css`
+      animation: shake 0.35s ease-in-out;
+
+      @media (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
+    `}
 `
 
 export const CategorySelect = styled.select`

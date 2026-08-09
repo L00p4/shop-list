@@ -6,7 +6,7 @@ export { default as ButtonSkeleton } from './button.skeleton'
 
 export type ButtonProps = {
   children: React.ReactNode
-  variant?: 'primary' | 'secondary' | 'danger' | 'warning'
+  variant?: 'primary' | 'secondary' | 'danger' | 'warning' | 'success'
   size?: 'compact' | 'small' | 'medium' | 'large'
   disabled?: boolean
   onClick?: () => void

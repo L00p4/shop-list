@@ -23,6 +23,7 @@ export const Header = styled.header`
     font-weight: var(--font-weight-semibold);
     color: var(--text-primary);
     flex: 1;
+    min-width: 0;
     text-align: center;
     word-break: break-word;
   }

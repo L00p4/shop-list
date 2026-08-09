@@ -8,6 +8,7 @@ import ListForm from './list-form'
 import {
   WrapperViewMinhasListas,
   Header,
+  HeaderActions,
   ListsContainer,
   ConfirmContent,
   ConfirmTitle,
@@ -117,7 +118,7 @@ const ViewMinhasListas = ({
     <WrapperViewMinhasListas>
       <Header>
         <h1>Minhas Listas</h1>
-        <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
+        <HeaderActions>
           <Button
             size="small"
             variant="secondary"
@@ -128,7 +129,7 @@ const ViewMinhasListas = ({
           <Button size="small" onClick={() => setModal({ type: 'create' })}>
             + Nova Lista
           </Button>
-        </div>
+        </HeaderActions>
       </Header>
 
       <ListsContainer>
